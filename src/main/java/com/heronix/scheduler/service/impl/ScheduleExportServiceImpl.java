@@ -1,0 +1,601 @@
+package com.heronix.scheduler.service.impl;
+
+import com.heronix.scheduler.model.domain.*;
+import com.heronix.scheduler.repository.ScheduleSlotRepository;
+import com.heronix.scheduler.service.ScheduleExportService;
+
+// iText PDF imports (excluding List to avoid conflict with java.util.List)
+import com.itextpdf.text.Anchor;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.Section;
+import com.itextpdf.text.pdf.*;
+
+// Apache POI for Excel
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
+
+// OpenCSV
+import com.opencsv.CSVWriter;
+
+// iCal4j for calendar export
+import net.fortuna.ical4j.data.CalendarOutputter;
+import net.fortuna.ical4j.model.Calendar;
+import net.fortuna.ical4j.model.DateTime;
+import net.fortuna.ical4j.model.component.VEvent;
+import net.fortuna.ical4j.model.property.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import lombok.extern.slf4j.Slf4j;
+
+import java.io.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.util.*;
+import java.util.stream.Collectors;
+
+/**
+ * ═══════════════════════════════════════════════════════════════
+ * SCHEDULE EXPORT SERVICE - COMPLETE IMPLEMENTATION
+ * Exports schedules to PDF, Excel, CSV, and iCalendar formats
+ * ═══════════════════════════════════════════════════════════════
+ * 
+ * Location:
+ * src/main/java/com/eduscheduler/service/impl/ScheduleExportServiceImpl.java
+ * 
+ * Features:
+ * ✓ PDF export with color coding
+ * ✓ Excel export with multiple sheets
+ * ✓ CSV export for data analysis
+ * ✓ iCalendar export for calendar apps
+ * ✓ Print-ready layouts
+ * 
+ * @author Heronix Scheduling System Team
+ * @version 2.0.0 - COMPLETE IMPLEMENTATION
+ * @since 2025-11-02
+ */
+@Slf4j
+@Service
+public class ScheduleExportServiceImpl implements ScheduleExportService {
+
+    @Autowired
+    private ScheduleSlotRepository scheduleSlotRepository;
+
+    private static final String EXPORTS_DIR = System.getProperty("user.home") + "/Heronix Scheduler/Exports";
+
+    // ═══════════════════════════════════════════════════════════════
+    // PDF EXPORT
+    // ═══════════════════════════════════════════════════════════════
+
+    @Override
+    @Transactional(readOnly = true)
+    public File exportToPDF(Schedule schedule) throws Exception {
+        // ✅ NULL SAFE: Validate schedule and schedule name
+        String scheduleName = (schedule != null && schedule.getScheduleName() != null)
+            ? schedule.getScheduleName() : "Unnamed Schedule";
+        log.info("📄 Exporting schedule to PDF: {}", scheduleName);
+
+        File exportsDir = getExportsDirectory();
+        File pdfFile = new File(exportsDir, generateFilename(schedule, "pdf"));
+
+        Document document = new Document(PageSize.A4.rotate());
+        PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
+
+        document.open();
+
+        // Title
+        Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18, BaseColor.DARK_GRAY);
+        Paragraph title = new Paragraph(scheduleName, titleFont);
+        title.setAlignment(Element.ALIGN_CENTER);
+        title.setSpacingAfter(20);
+        document.add(title);
+
+        // Date range
+        Font dateFont = FontFactory.getFont(FontFactory.HELVETICA, 12, BaseColor.GRAY);
+        // ✅ NULL SAFE: Safe extraction of date range with defaults
+        String startDate = (schedule != null && schedule.getStartDate() != null)
+            ? schedule.getStartDate().toString() : "N/A";
+        String endDate = (schedule != null && schedule.getEndDate() != null)
+            ? schedule.getEndDate().toString() : "N/A";
+        Paragraph dateRange = new Paragraph(
+                "Date Range: " + startDate + " to " + endDate,
+                dateFont);
+        dateRange.setAlignment(Element.ALIGN_CENTER);
+        dateRange.setSpacingAfter(15);
+        document.add(dateRange);
+
+        // Schedule grid
+        List<ScheduleSlot> slots = scheduleSlotRepository.findByScheduleId(schedule.getId());
+        PdfPTable table = createPDFTable(slots);
+        document.add(table);
+
+        // Footer
+        Paragraph footer = new Paragraph(
+                "Generated by Heronix Scheduling System on " + LocalDate.now(),
+                FontFactory.getFont(FontFactory.HELVETICA, 8, BaseColor.LIGHT_GRAY));
+        footer.setAlignment(Element.ALIGN_CENTER);
+        footer.setSpacingBefore(20);
+        document.add(footer);
+
+        document.close();
+
+        log.info("✅ PDF exported successfully: {} ({} KB)", pdfFile.getName(), pdfFile.length() / 1024);
+        return pdfFile;
+    }
+
+    private PdfPTable createPDFTable(List<ScheduleSlot> slots) {
+        // Group by day and time
+        // ✅ NULL SAFE: Filter null slots before grouping
+        Map<java.time.DayOfWeek, List<ScheduleSlot>> slotsByDay = slots.stream()
+                .filter(s -> s != null && s.getDayOfWeek() != null)
+                .collect(Collectors.groupingBy(ScheduleSlot::getDayOfWeek));
+
+        // ✅ NULL SAFE: Filter null slots and times before mapping
+        List<LocalTime> times = slots.stream()
+                .filter(s -> s != null && s.getStartTime() != null)
+                .map(ScheduleSlot::getStartTime)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+
+        PdfPTable table = new PdfPTable(6); // Time + 5 days
+        table.setWidthPercentage(100);
+        table.setSpacingBefore(10);
+
+        // Headers
+        String[] headers = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+        for (String header : headers) {
+            PdfPCell cell = new PdfPCell(new Phrase(header, FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12)));
+            cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setPadding(8);
+            table.addCell(cell);
+        }
+
+        // Data rows
+        for (LocalTime time : times) {
+            // Time column
+            PdfPCell timeCell = new PdfPCell(new Phrase(time.toString()));
+            timeCell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            timeCell.setPadding(5);
+            table.addCell(timeCell);
+
+            // Day columns
+            for (int day = 1; day <= 5; day++) {
+                final int currentDay = day; // Make effectively final for lambda
+                PdfPCell cell = new PdfPCell();
+                cell.setPadding(5);
+
+                // Find slot for this day and time
+                // ✅ NULL SAFE: Filter null slots before checking properties
+                Optional<ScheduleSlot> slot = slots.stream()
+                        .filter(s -> s != null && s.getDayOfWeek() != null && s.getStartTime() != null)
+                        .filter(s -> s.getDayOfWeek().getValue() == currentDay && s.getStartTime().equals(time))
+                        .findFirst();
+
+                if (slot.isPresent()) {
+                    ScheduleSlot s = slot.get();
+                    // ✅ NULL SAFE: Safe extraction of nested properties
+                    String courseName = (s.getCourse() != null && s.getCourse().getCourseName() != null)
+                        ? s.getCourse().getCourseName() : "";
+                    String teacherName = (s.getTeacher() != null && s.getTeacher().getName() != null)
+                        ? s.getTeacher().getName() : "";
+                    String roomNumber = (s.getRoom() != null && s.getRoom().getRoomNumber() != null)
+                        ? s.getRoom().getRoomNumber() : "";
+                    String content = String.format("%s\n%s\n%s", courseName, teacherName, roomNumber);
+                    cell.setPhrase(new Phrase(content, FontFactory.getFont(FontFactory.HELVETICA, 8)));
+
+                    // Color coding by subject
+                    // ✅ NULL SAFE: Check course exists before accessing subject
+                    if (s.getCourse() != null && s.getCourse().getSubject() != null) {
+                        cell.setBackgroundColor(getSubjectColor(s.getCourse().getSubject()));
+                    }
+                }
+
+                table.addCell(cell);
+            }
+        }
+
+        return table;
+    }
+
+    private BaseColor getSubjectColor(String subject) {
+        if (subject == null)
+            return BaseColor.WHITE;
+
+        return switch (subject.toLowerCase()) {
+            case "math" -> new BaseColor(173, 216, 230); // Light blue
+            case "science" -> new BaseColor(144, 238, 144); // Light green
+            case "english" -> new BaseColor(255, 218, 185); // Peach
+            case "history" -> new BaseColor(221, 160, 221); // Plum
+            case "pe", "physical education" -> new BaseColor(255, 255, 224); // Light yellow
+            default -> BaseColor.WHITE;
+        };
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // EXCEL EXPORT
+    // ═══════════════════════════════════════════════════════════════
+
+    @Override
+    @Transactional(readOnly = true)
+    public File exportToExcel(Schedule schedule) throws Exception {
+        log.info("📊 Exporting schedule to Excel: {}", schedule.getScheduleName());
+
+        File exportsDir = getExportsDirectory();
+        File excelFile = new File(exportsDir, generateFilename(schedule, "xlsx"));
+
+        try (Workbook workbook = new XSSFWorkbook()) {
+            List<ScheduleSlot> slots = scheduleSlotRepository.findByScheduleId(schedule.getId());
+
+            // Sheet 1: Schedule Grid
+            createScheduleSheet(workbook, schedule, slots);
+
+            // Sheet 2: Detailed List
+            createDetailsSheet(workbook, slots);
+
+            // Sheet 3: Statistics
+            createStatisticsSheet(workbook, schedule, slots);
+
+            // Write to file
+            try (FileOutputStream fos = new FileOutputStream(excelFile)) {
+                workbook.write(fos);
+            }
+        }
+
+        log.info("✅ Excel exported successfully: {} ({} KB)", excelFile.getName(), excelFile.length() / 1024);
+        return excelFile;
+    }
+
+    private void createScheduleSheet(Workbook workbook, Schedule schedule, List<ScheduleSlot> slots) {
+        Sheet sheet = workbook.createSheet("Schedule");
+
+        CellStyle headerStyle = createHeaderStyle(workbook);
+        CellStyle dataStyle = createDataStyle(workbook);
+
+        // Title row
+        Row titleRow = sheet.createRow(0);
+        Cell titleCell = titleRow.createCell(0);
+        titleCell.setCellValue(schedule.getScheduleName());
+        CellStyle titleStyle = workbook.createCellStyle();
+        org.apache.poi.ss.usermodel.Font titleFont = workbook.createFont();
+        titleFont.setBold(true);
+        titleFont.setFontHeightInPoints((short) 16);
+        titleStyle.setFont(titleFont);
+        titleCell.setCellStyle(titleStyle);
+
+        // Header row
+        Row headerRow = sheet.createRow(2);
+        String[] headers = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday" };
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+            cell.setCellStyle(headerStyle);
+        }
+
+        // Data rows
+        // ✅ NULL SAFE: Filter null slots before mapping times
+        List<LocalTime> times = slots.stream()
+                .filter(s -> s != null && s.getStartTime() != null)
+                .map(ScheduleSlot::getStartTime)
+                .distinct()
+                .sorted()
+                .collect(Collectors.toList());
+
+        int rowNum = 3;
+        for (LocalTime time : times) {
+            Row row = sheet.createRow(rowNum++);
+
+            // Time cell
+            Cell timeCell = row.createCell(0);
+            timeCell.setCellValue(time.toString());
+            timeCell.setCellStyle(headerStyle);
+
+            // Day cells
+            for (int day = 1; day <= 5; day++) {
+                final int dayNum = day;
+                // ✅ NULL SAFE: Filter null slots before checking properties
+                Optional<ScheduleSlot> slot = slots.stream()
+                        .filter(s -> s != null && s.getDayOfWeek() != null && s.getStartTime() != null)
+                        .filter(s -> s.getDayOfWeek().getValue() == dayNum && s.getStartTime().equals(time))
+                        .findFirst();
+
+                Cell cell = row.createCell(day);
+                if (slot.isPresent()) {
+                    ScheduleSlot s = slot.get();
+                    // ✅ NULL SAFE: Safe extraction of nested properties
+                    String courseName = (s.getCourse() != null && s.getCourse().getCourseName() != null)
+                        ? s.getCourse().getCourseName() : "";
+                    String teacherName = (s.getTeacher() != null && s.getTeacher().getName() != null)
+                        ? s.getTeacher().getName() : "";
+                    String roomNumber = (s.getRoom() != null && s.getRoom().getRoomNumber() != null)
+                        ? s.getRoom().getRoomNumber() : "";
+                    String content = String.format("%s\n%s\n%s", courseName, teacherName, roomNumber);
+                    cell.setCellValue(content);
+                }
+                cell.setCellStyle(dataStyle);
+            }
+        }
+
+        // Auto-size columns
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+    }
+
+    private void createDetailsSheet(Workbook workbook, List<ScheduleSlot> slots) {
+        Sheet sheet = workbook.createSheet("Details");
+
+        CellStyle headerStyle = createHeaderStyle(workbook);
+
+        // Headers
+        Row headerRow = sheet.createRow(0);
+        String[] headers = { "Day", "Start Time", "End Time", "Course", "Teacher", "Room", "Students" };
+        for (int i = 0; i < headers.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(headers[i]);
+            cell.setCellStyle(headerStyle);
+        }
+
+        // Data
+        int rowNum = 1;
+        for (ScheduleSlot slot : slots) {
+            // ✅ NULL SAFE: Skip null slots
+            if (slot == null) continue;
+
+            Row row = sheet.createRow(rowNum++);
+
+            row.createCell(0).setCellValue(slot.getDayOfWeek() != null ? slot.getDayOfWeek().toString() : "N/A");
+            row.createCell(1).setCellValue(slot.getStartTime() != null ? slot.getStartTime().toString() : "N/A");
+            row.createCell(2).setCellValue(slot.getEndTime() != null ? slot.getEndTime().toString() : "N/A");
+            // ✅ NULL SAFE: Safe extraction of nested properties
+            row.createCell(3).setCellValue(
+                (slot.getCourse() != null && slot.getCourse().getCourseName() != null)
+                    ? slot.getCourse().getCourseName() : "");
+            row.createCell(4).setCellValue(
+                (slot.getTeacher() != null && slot.getTeacher().getName() != null)
+                    ? slot.getTeacher().getName() : "");
+            row.createCell(5).setCellValue(
+                (slot.getRoom() != null && slot.getRoom().getRoomNumber() != null)
+                    ? slot.getRoom().getRoomNumber() : "");
+            row.createCell(6).setCellValue(slot.getEnrolledStudents());
+        }
+
+        // Auto-size
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+    }
+
+    private void createStatisticsSheet(Workbook workbook, Schedule schedule, List<ScheduleSlot> slots) {
+        Sheet sheet = workbook.createSheet("Statistics");
+
+        int rowNum = 0;
+
+        // Total slots
+        Row row1 = sheet.createRow(rowNum++);
+        row1.createCell(0).setCellValue("Total Schedule Slots:");
+        row1.createCell(1).setCellValue(slots.size());
+
+        // Unique teachers
+        Row row2 = sheet.createRow(rowNum++);
+        row2.createCell(0).setCellValue("Unique Teachers:");
+        // ✅ NULL SAFE: Filter null slots before mapping teachers
+        row2.createCell(1).setCellValue(slots.stream()
+                .filter(Objects::nonNull)
+                .map(ScheduleSlot::getTeacher)
+                .filter(Objects::nonNull)
+                .distinct()
+                .count());
+
+        // Unique rooms
+        Row row3 = sheet.createRow(rowNum++);
+        row3.createCell(0).setCellValue("Unique Rooms:");
+        // ✅ NULL SAFE: Filter null slots before mapping rooms
+        row3.createCell(1).setCellValue(slots.stream()
+                .filter(Objects::nonNull)
+                .map(ScheduleSlot::getRoom)
+                .filter(Objects::nonNull)
+                .distinct()
+                .count());
+
+        // Total enrolled students
+        Row row4 = sheet.createRow(rowNum++);
+        row4.createCell(0).setCellValue("Total Student Enrollments:");
+        // ✅ NULL SAFE: Filter null slots before summing enrollments
+        row4.createCell(1).setCellValue(slots.stream()
+                .filter(Objects::nonNull)
+                .mapToInt(ScheduleSlot::getEnrolledStudents)
+                .sum());
+
+        sheet.autoSizeColumn(0);
+        sheet.autoSizeColumn(1);
+    }
+
+    private CellStyle createHeaderStyle(Workbook workbook) {
+        CellStyle style = workbook.createCellStyle();
+        org.apache.poi.ss.usermodel.Font font = workbook.createFont();
+        font.setBold(true);
+        font.setFontHeightInPoints((short) 12);
+        style.setFont(font);
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setVerticalAlignment(VerticalAlignment.CENTER);
+        style.setFillForegroundColor(IndexedColors.GREY_25_PERCENT.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setBorderTop(BorderStyle.THIN);
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        return style;
+    }
+
+    private CellStyle createDataStyle(Workbook workbook) {
+        CellStyle style = workbook.createCellStyle();
+        style.setWrapText(true);
+        style.setAlignment(HorizontalAlignment.CENTER);
+        style.setVerticalAlignment(VerticalAlignment.TOP);
+        style.setBorderBottom(BorderStyle.THIN);
+        style.setBorderTop(BorderStyle.THIN);
+        style.setBorderLeft(BorderStyle.THIN);
+        style.setBorderRight(BorderStyle.THIN);
+        return style;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // CSV EXPORT
+    // ═══════════════════════════════════════════════════════════════
+
+    @Override
+    @Transactional(readOnly = true)
+    public File exportToCSV(Schedule schedule) throws Exception {
+        log.info("📋 Exporting schedule to CSV: {}", schedule.getScheduleName());
+
+        File exportsDir = getExportsDirectory();
+        File csvFile = new File(exportsDir, generateFilename(schedule, "csv"));
+
+        List<ScheduleSlot> slots = scheduleSlotRepository.findByScheduleId(schedule.getId());
+
+        try (CSVWriter writer = new CSVWriter(new FileWriter(csvFile))) {
+            // Header
+            String[] header = { "Day", "Start Time", "End Time", "Course", "Course Code",
+                    "Teacher", "Room", "Enrolled Students", "Status" };
+            writer.writeNext(header);
+
+            // Data
+            for (ScheduleSlot slot : slots) {
+                // ✅ NULL SAFE: Skip null slots
+                if (slot == null) continue;
+
+                // ✅ NULL SAFE: Safe extraction of all properties
+                String[] row = {
+                        slot.getDayOfWeek() != null ? slot.getDayOfWeek().toString() : "N/A",
+                        slot.getStartTime() != null ? slot.getStartTime().toString() : "N/A",
+                        slot.getEndTime() != null ? slot.getEndTime().toString() : "N/A",
+                        (slot.getCourse() != null && slot.getCourse().getCourseName() != null)
+                            ? slot.getCourse().getCourseName() : "",
+                        (slot.getCourse() != null && slot.getCourse().getCourseCode() != null)
+                            ? slot.getCourse().getCourseCode() : "",
+                        (slot.getTeacher() != null && slot.getTeacher().getName() != null)
+                            ? slot.getTeacher().getName() : "",
+                        (slot.getRoom() != null && slot.getRoom().getRoomNumber() != null)
+                            ? slot.getRoom().getRoomNumber() : "",
+                        String.valueOf(slot.getEnrolledStudents()),
+                        slot.getStatus() != null ? slot.getStatus().toString() : "UNKNOWN"
+                };
+                writer.writeNext(row);
+            }
+        }
+
+        log.info("✅ CSV exported successfully: {} ({} KB)", csvFile.getName(), csvFile.length() / 1024);
+        return csvFile;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // iCALENDAR EXPORT
+    // ═══════════════════════════════════════════════════════════════
+
+    @Override
+    @Transactional(readOnly = true)
+    public File exportToICalendar(Schedule schedule) throws Exception {
+        log.info("📅 Exporting schedule to iCalendar: {}", schedule.getScheduleName());
+
+        File exportsDir = getExportsDirectory();
+        File icalFile = new File(exportsDir, generateFilename(schedule, "ics"));
+
+        Calendar calendar = new Calendar();
+        calendar.getProperties().add(new ProdId("-//Heronix Scheduling System//Schedule Export//EN"));
+        calendar.getProperties().add(Version.VERSION_2_0);
+        calendar.getProperties().add(CalScale.GREGORIAN);
+        calendar.getProperties().add(new XProperty("X-WR-CALNAME", schedule.getScheduleName()));
+
+        List<ScheduleSlot> slots = scheduleSlotRepository.findByScheduleId(schedule.getId());
+
+        for (ScheduleSlot slot : slots) {
+            // ✅ NULL SAFE: Skip null slots and slots with incomplete time information
+            if (slot == null || slot.getDayOfWeek() == null || slot.getStartTime() == null || slot.getEndTime() == null) {
+                log.warn("Skipping slot {} - missing time information", slot != null ? slot.getId() : "null");
+                continue;
+            }
+
+            // Create event for each slot
+            // Convert DayOfWeek to LocalDate by finding the first occurrence of that day from schedule start
+            // ✅ NULL SAFE: Validate schedule start date
+            LocalDate scheduleStart = (schedule != null && schedule.getStartDate() != null)
+                ? schedule.getStartDate() : LocalDate.now();
+            LocalDate slotDate = scheduleStart.with(java.time.temporal.TemporalAdjusters.nextOrSame(slot.getDayOfWeek()));
+
+            java.util.Date startDate = Date.from(
+                    slotDate.atTime(slot.getStartTime())
+                            .atZone(ZoneId.systemDefault())
+                            .toInstant());
+
+            java.util.Date endDate = Date.from(
+                    slotDate.atTime(slot.getEndTime())
+                            .atZone(ZoneId.systemDefault())
+                            .toInstant());
+
+            // ✅ NULL SAFE: Safe extraction of course name
+            String summary = (slot.getCourse() != null && slot.getCourse().getCourseName() != null)
+                ? slot.getCourse().getCourseName() : "Class";
+            // ✅ NULL SAFE: Safe extraction of teacher and room info
+            String teacherName = (slot.getTeacher() != null && slot.getTeacher().getName() != null)
+                ? slot.getTeacher().getName() : "TBA";
+            String roomNumber = (slot.getRoom() != null && slot.getRoom().getRoomNumber() != null)
+                ? slot.getRoom().getRoomNumber() : "TBA";
+            String description = String.format("Teacher: %s\nRoom: %s\nStudents: %d",
+                    teacherName, roomNumber, slot.getEnrolledStudents());
+
+            VEvent event = new VEvent(new DateTime(startDate), new DateTime(endDate), summary);
+            event.getProperties().add(new Description(description));
+            event.getProperties().add(new Location(roomNumber));
+            event.getProperties().add(new Uid(UUID.randomUUID().toString()));
+
+            calendar.getComponents().add(event);
+        }
+
+        // Write to file
+        try (FileOutputStream fos = new FileOutputStream(icalFile)) {
+            CalendarOutputter outputter = new CalendarOutputter();
+            outputter.output(calendar, fos);
+        }
+
+        log.info("✅ iCalendar exported successfully: {} ({} KB)", icalFile.getName(), icalFile.length() / 1024);
+        return icalFile;
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // UTILITY METHODS
+    // ═══════════════════════════════════════════════════════════════
+
+    @Override
+    public File getExportsDirectory() {
+        File dir = new File(EXPORTS_DIR);
+        if (!dir.exists()) {
+            dir.mkdirs();
+            log.info("📁 Created exports directory: {}", EXPORTS_DIR);
+        }
+        return dir;
+    }
+
+    private String generateFilename(Schedule schedule, String extension) {
+        // ✅ NULL SAFE: Safe extraction of schedule name with default
+        String scheduleName = (schedule != null && schedule.getScheduleName() != null)
+            ? schedule.getScheduleName() : "unnamed_schedule";
+        String safeName = scheduleName.replaceAll("[^a-zA-Z0-9.-]", "_");
+        String timestamp = LocalDate.now().toString().replace("-", "");
+        return String.format("%s_%s.%s", safeName, timestamp, extension);
+    }
+}

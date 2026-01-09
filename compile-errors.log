@@ -1,0 +1,596 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------< com.heronix:heronix-scheduler >--------------------
+[INFO] Building Heronix AI Scheduling Engine 2.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[WARNING] 6 problems were encountered while building the effective model for org.openjfx:javafx-controls:jar:21 during dependency collection step for project (use -X to see details)
+[INFO] 
+[INFO] --- clean:3.3.2:clean (default-clean) @ heronix-scheduler ---
+[INFO] Deleting H:\Heronix\Heronix-SchedulerV2\target
+[INFO] 
+[INFO] --- jacoco:0.8.11:prepare-agent (prepare-agent) @ heronix-scheduler ---
+[INFO] argLine set to -javaagent:C:\\Users\\Gamer\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.11\\org.jacoco.agent-0.8.11-runtime.jar=destfile=H:\\Heronix\\Heronix-SchedulerV2\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ heronix-scheduler ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ heronix-scheduler ---
+[INFO] Changes detected - recompiling the module! :source
+[INFO] Compiling 279 source files with javac [debug release 21] to target\classes
+[INFO] Annotation processing is enabled because one or more processors were found
+  on the class path. A future release of javac may disable annotation processing
+  unless at least one processor is specified by name (-processor), or a search
+  path is specified (--processor-path, --processor-module-path), or annotation
+  processing is enabled explicitly (-proc:only, -proc:full).
+  Use -Xlint:-options to suppress this message.
+  Use -proc:none to disable annotation processing.
+[INFO] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/model/domain/ScheduleSlot.java: Some input files use or override a deprecated API.
+[INFO] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/model/domain/ScheduleSlot.java: Recompile with -Xlint:deprecation for details.
+[INFO] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EnhancedScheduleViewController.java: Some input files use unchecked or unsafe operations.
+[INFO] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EnhancedScheduleViewController.java: Recompile with -Xlint:unchecked for details.
+[INFO] Some messages have been simplified; recompile with -Xdiags:verbose to get full output
+[INFO] -------------------------------------------------------------
+[WARNING] COMPILATION WARNING : 
+[INFO] -------------------------------------------------------------
+[WARNING] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/model/domain/PeriodTimer.java:[87,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/model/domain/PeriodTimer.java:[94,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/model/domain/PeriodTimer.java:[102,20] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/model/domain/PeriodTimer.java:[109,21] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/model/domain/LunchWave.java:[132,31] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[WARNING] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/model/domain/LunchWave.java:[138,20] @Builder will ignore the initializing expression entirely. If you want the initializing expression to serve as default, add @Builder.Default. If it is not supposed to be settable during building, make the field final.
+[INFO] 6 warnings 
+[INFO] -------------------------------------------------------------
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomsController.java:[756,72] cannot find symbol
+  symbol:   method generateRoomPhoneNumber(java.lang.String)
+  location: variable districtSettingsService of type com.heronix.scheduler.service.DistrictSettingsService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomsController.java:[880,44] cannot find symbol
+  symbol:   method exportRoomsToCSV(javafx.collections.ObservableList<com.heronix.scheduler.model.domain.Room>)
+  location: variable exportService of type com.heronix.scheduler.service.ExportService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[168,13] cannot find symbol
+  symbol:   method manualOverride(boolean)
+  location: class com.heronix.scheduler.model.domain.StudentLunchAssignment.StudentLunchAssignmentBuilder
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[1045,19] method markAsManualOverride in class com.heronix.scheduler.model.domain.StudentLunchAssignment cannot be applied to given types;
+  required: no arguments
+  found:    java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[1117,13] cannot find symbol
+  symbol:   method isDutyFree(boolean)
+  location: class com.heronix.scheduler.model.domain.TeacherLunchAssignment.TeacherLunchAssignmentBuilder
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[1162,19] method assignSupervisionDuty in class com.heronix.scheduler.model.domain.TeacherLunchAssignment cannot be applied to given types;
+  required: no arguments
+  found:    java.lang.String,java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[1174,19] method removeSupervisionDuty in class com.heronix.scheduler.model.domain.TeacherLunchAssignment cannot be applied to given types;
+  required: no arguments
+  found:    java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/ScheduleGenerationService.java:[1299,23] no suitable constructor found for LunchWave(int)
+    constructor com.heronix.scheduler.model.domain.LunchWave.LunchWave() is not applicable
+      (actual and formal argument lists differ in length)
+    constructor com.heronix.scheduler.model.domain.LunchWave.LunchWave(java.lang.Long,com.heronix.scheduler.model.domain.Schedule,java.lang.String,java.lang.Integer,java.time.LocalTime,java.time.LocalTime,java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.Boolean,com.heronix.scheduler.model.domain.Room,java.lang.String,java.util.List<com.heronix.scheduler.model.dto.LunchCohort>,java.lang.Double) is not applicable
+      (actual and formal argument lists differ in length)
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherAvailabilityDialogController.java:[84,85] incompatible types: java.util.List<java.lang.String> cannot be converted to java.util.List<com.heronix.scheduler.model.dto.UnavailableTimeBlock>
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherAvailabilityDialogController.java:[214,59] incompatible types: cannot infer type arguments for java.util.ArrayList<>
+    reason: inference variable E has incompatible bounds
+      equality constraints: java.lang.String
+      lower bounds: com.heronix.scheduler.model.dto.UnavailableTimeBlock
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherAvailabilityDialogController.java:[217,13] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.controller.TeacherAvailabilityDialogController
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherRoomPreferencesDialogController.java:[87,59] incompatible types: java.util.List<com.heronix.scheduler.model.domain.Room> cannot be converted to com.heronix.scheduler.model.dto.RoomPreferences
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherRoomPreferencesDialogController.java:[150,67] incompatible types: java.util.List<com.heronix.scheduler.model.domain.Room> cannot be converted to com.heronix.scheduler.model.dto.RoomPreferences
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/IntelligentCourseAssignmentService.java:[334,42] incompatible types: com.heronix.scheduler.model.domain.Course cannot be converted to java.lang.Double
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/IntelligentCourseAssignmentService.java:[376,20] method approve in class com.heronix.scheduler.model.domain.CourseEnrollmentRequest cannot be applied to given types;
+  required: java.lang.String
+  found:    java.lang.String,java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/IntelligentCourseAssignmentService.java:[456,65] incompatible types: com.heronix.scheduler.model.domain.Course cannot be converted to java.lang.Double
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/IntelligentCourseAssignmentService.java:[474,33] method approve in class com.heronix.scheduler.model.domain.CourseEnrollmentRequest cannot be applied to given types;
+  required: java.lang.String
+  found:    java.lang.String,java.lang.String
+  reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1271,50] method isAvailableAt in class com.heronix.scheduler.model.domain.Teacher cannot be applied to given types;
+  required: java.lang.String
+  found:    java.time.DayOfWeek,java.time.LocalTime
+  reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1397,103] incompatible types: java.util.List<com.heronix.scheduler.model.domain.Room> cannot be converted to com.heronix.scheduler.model.dto.RoomPreferences
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1763,47] cannot find symbol
+  symbol:   method getRoom()
+  location: variable assignment of type com.heronix.scheduler.model.domain.Room
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1764,47] cannot find symbol
+  symbol:   method getRoom()
+  location: variable assignment of type com.heronix.scheduler.model.domain.Room
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1833,120] incompatible types: com.heronix.scheduler.model.domain.Room cannot be converted to com.heronix.scheduler.model.domain.CourseRoomAssignment
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1917,124] incompatible types: com.heronix.scheduler.model.domain.Room cannot be converted to com.heronix.scheduler.model.domain.CourseRoomAssignment
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ConflictDashboardController.java:[1237,73] package com.heronix.security does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[388,76] incompatible types: com.heronix.scheduler.model.domain.Course cannot be converted to java.lang.Long
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[503,34] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[521,9] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[562,34] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[602,9] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[707,32] cannot find symbol
+  symbol:   variable courseRepository
+  location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/FitnessEvaluator.java:[180,48] incompatible types: java.lang.Double cannot be converted to int
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleGeneratorController.java:[1101,36] cannot find symbol
+  symbol:   method showDialog(javafx.stage.Window)
+  location: variable fixViolationsDialog of type com.heronix.scheduler.ui.dialog.FixViolationsDialog
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/RoomEquipmentService.java:[181,73] cannot find symbol
+  symbol:   method getDisplayName()
+  location: class java.lang.String
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/RoomEquipmentService.java:[298,69] cannot find symbol
+  symbol:   method getDisplayName()
+  location: class java.lang.String
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SpecialDutyRosterController.java:[704,42] constructor TimePickerField in class com.heronix.scheduler.ui.components.TimePickerField cannot be applied to given types;
+  required: no arguments
+  found:    java.time.LocalTime
+  reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SpecialDutyRosterController.java:[705,40] constructor TimePickerField in class com.heronix.scheduler.ui.components.TimePickerField cannot be applied to given types;
+  required: no arguments
+  found:    java.time.LocalTime
+  reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SpecialDutyRosterController.java:[709,34] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.controller.ui.SpecialDutyRosterController
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleSlotEditDialogController.java:[139,34] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.controller.ui.ScheduleSlotEditDialogController
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleSlotEditDialogController.java:[297,78] cannot find symbol
+  symbol:   method getDisplayName()
+  location: class java.lang.String
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleSlotEditDialogController.java:[517,17] cannot find symbol
+  symbol:   variable courseRepository
+  location: class com.heronix.scheduler.controller.ui.ScheduleSlotEditDialogController
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchPeriodServiceImpl.java:[204,20] cannot find symbol
+  symbol:   method getScheduleSlots()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchPeriodServiceImpl.java:[206,23] cannot find symbol
+  symbol:   method getScheduleSlots()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EnhancedScheduleViewController.java:[1330,49] cannot find symbol
+  symbol:   method resolveConflict(com.heronix.scheduler.model.domain.Schedule,com.heronix.scheduler.model.domain.ScheduleSlot,com.heronix.scheduler.model.domain.TimeSlot)
+  location: variable hybridSolver of type com.heronix.scheduler.ui.controller.EnhancedHybridScheduler
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/HybridSchedulingSolver.java:[378,40] cannot find symbol
+  symbol:   class ScheduleNotFoundException
+  location: class com.heronix.scheduler.solver.HybridSchedulingSolver
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SmartRoomAssignmentService.java:[88,27] cannot find symbol
+  symbol:   method setRoom(com.heronix.scheduler.model.domain.Room)
+  location: variable course of type com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SmartRoomAssignmentService.java:[89,21] cannot find symbol
+  symbol:   variable courseRepository
+  location: class com.heronix.scheduler.service.SmartRoomAssignmentService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SubstituteScheduleGeneratorService.java:[286,35] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.service.SubstituteScheduleGeneratorService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SubstituteScheduleGeneratorService.java:[303,16] cannot find symbol
+  symbol:   method setPhoneNumber(java.lang.String)
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SubstituteScheduleGeneratorService.java:[307,16] cannot find symbol
+  symbol:   method setTeacherRole(java.lang.String)
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SubstituteScheduleGeneratorService.java:[310,16] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.service.SubstituteScheduleGeneratorService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleEditorController.java:[325,39] package com.heronix.model.dto does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleEditorController.java:[330,21] no suitable method found for collect(java.util.stream.Collector<java.lang.CharSequence,capture#1 of ?,java.lang.String>)
+    method java.util.stream.Stream.<R>collect(java.util.function.Supplier<R>,java.util.function.BiConsumer<R,? super java.lang.Object>,java.util.function.BiConsumer<R,R>) is not applicable
+      (cannot infer type-variable(s) R
+        (actual and formal argument lists differ in length))
+    method java.util.stream.Stream.<R,A>collect(java.util.stream.Collector<? super java.lang.Object,A,R>) is not applicable
+      (cannot infer type-variable(s) R,A
+        (argument mismatch; java.util.stream.Collector<java.lang.CharSequence,capture#2 of ?,java.lang.String> cannot be converted to java.util.stream.Collector<? super java.lang.Object,A,R>))
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleEditorController.java:[418,39] package com.heronix.model.dto does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleEditorController.java:[423,21] no suitable method found for collect(java.util.stream.Collector<java.lang.CharSequence,capture#3 of ?,java.lang.String>)
+    method java.util.stream.Stream.<R>collect(java.util.function.Supplier<R>,java.util.function.BiConsumer<R,? super java.lang.Object>,java.util.function.BiConsumer<R,R>) is not applicable
+      (cannot infer type-variable(s) R
+        (actual and formal argument lists differ in length))
+    method java.util.stream.Stream.<R,A>collect(java.util.stream.Collector<? super java.lang.Object,A,R>) is not applicable
+      (cannot infer type-variable(s) R,A
+        (argument mismatch; java.util.stream.Collector<java.lang.CharSequence,capture#4 of ?,java.lang.String> cannot be converted to java.util.stream.Collector<? super java.lang.Object,A,R>))
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewController.java:[641,55] cannot find symbol
+  symbol:   method renderWeeklyGrid(java.util.List<com.heronix.scheduler.model.domain.ScheduleSlot>,java.time.LocalTime,java.time.LocalTime,int)
+  location: class com.heronix.scheduler.ui.component.ModernCalendarGrid
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewController.java:[692,50] cannot find symbol
+  symbol:   method renderDailyGrid(java.util.List<com.heronix.scheduler.model.domain.ScheduleSlot>,java.time.DayOfWeek,java.time.LocalTime,java.time.LocalTime,int)
+  location: class com.heronix.scheduler.ui.component.ModernCalendarGrid
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[614,59] package com.heronix.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[879,58] package com.heronix.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1124,50] cannot find symbol
+  symbol:   class ExportFormat
+  location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1129,63] cannot find symbol
+  symbol:   class ExportFormat
+  location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1133,63] cannot find symbol
+  symbol:   class ExportFormat
+  location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1137,63] cannot find symbol
+  symbol:   class ExportFormat
+  location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1141,63] cannot find symbol
+  symbol:   class ExportFormat
+  location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1145,63] cannot find symbol
+  symbol:   class ExportFormat
+  location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1149,63] cannot find symbol
+  symbol:   class ExportFormat
+  location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1361,46] package com.heronix.ui.controller.dialogs does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[265,32] cannot find symbol
+  symbol:   method getPreferredBreakMinutes()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[265,78] cannot find symbol
+  symbol:   method getPreferredBreakMinutes()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[273,40] cannot find symbol
+  symbol:   method getPreferredBreakMinutes()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[390,45] cannot find symbol
+  symbol:   method getMaxConsecutiveHours()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[390,88] cannot find symbol
+  symbol:   method getMaxConsecutiveHours()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[638,23] cannot find symbol
+  symbol:   method getRequiredResources()
+  location: variable course of type com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[638,65] cannot find symbol
+  symbol:   method getRequiredResources()
+  location: variable course of type com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[639,42] cannot find symbol
+  symbol:   method getRequiredResources()
+  location: variable course of type com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[1027,73] cannot find symbol
+  symbol:   method getPrerequisites()
+  location: class com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[1028,40] cannot find symbol
+  symbol:   method getPrerequisites()
+  location: class com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[1034,62] cannot find symbol
+  symbol:   method getPrerequisites()
+  location: class com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomManagementController.java:[102,28] package com.heronix.ui.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomManagementController.java:[105,43] package com.heronix.ui.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomManagementController.java:[459,44] cannot find symbol
+  symbol:   method exportRoomsToExcel(javafx.collections.ObservableList<com.heronix.scheduler.model.domain.Room>)
+  location: variable exportService of type com.heronix.scheduler.service.ExportService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/ScheduleIssueDetector.java:[363,21] incompatible types: unexpected instance method <T>isUnassigned(T) found in unbound lookup
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[60,20] cannot find symbol
+  symbol:   method getPhoneNumber()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[60,76] cannot find symbol
+  symbol:   method getPhoneNumber()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[68,20] cannot find symbol
+  symbol:   method getMaxConsecutiveHours()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[72,20] cannot find symbol
+  symbol:   method getPreferredBreakMinutes()
+  location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[170,20] cannot find symbol
+  symbol:   method getEmail()
+  location: variable student of type com.heronix.scheduler.model.domain.Student
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[170,64] cannot find symbol
+  symbol:   method getEmail()
+  location: variable student of type com.heronix.scheduler.model.domain.Student
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/OptimizationServiceImpl.java:[206,86] incompatible types: int cannot be converted to java.lang.Double
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/OptimizationServiceImpl.java:[350,13] cannot find symbol
+  symbol:   method useParallelProcessing(boolean)
+  location: class com.heronix.scheduler.model.domain.OptimizationConfig.OptimizationConfigBuilder
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ComplianceValidationService.java:[255,43] cannot find symbol
+  symbol:   variable teacherRepository
+  location: class com.heronix.scheduler.service.impl.ComplianceValidationService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewerController.java:[981,78] package com.heronix.ui.component does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewerController.java:[1304,63] package com.heronix.ui.component does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewerController.java:[1311,63] package com.heronix.ui.component does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EnhancedHybridScheduler.java:[411,46] package com.heronix.solver.exception does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EnhancedHybridScheduler.java:[416,46] package com.heronix.solver.exception does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[133,28] package com.heronix.ui.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[136,43] package com.heronix.ui.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[634,44] cannot find symbol
+  symbol:   method exportEventsToICal(javafx.collections.ObservableList<com.heronix.scheduler.model.domain.Event>)
+  location: variable exportService of type com.heronix.scheduler.service.ExportService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[685,42] constructor TimePickerField in class com.heronix.scheduler.ui.components.TimePickerField cannot be applied to given types;
+  required: no arguments
+  found:    java.time.LocalTime
+  reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[690,40] constructor TimePickerField in class com.heronix.scheduler.ui.components.TimePickerField cannot be applied to given types;
+  required: no arguments
+  found:    java.time.LocalTime
+  reason: actual and formal argument lists differ in length
+[INFO] 100 errors 
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  24.014 s
+[INFO] Finished at: 2025-12-25T21:17:14-05:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.11.0:compile (default-compile) on project heronix-scheduler: Compilation failure: Compilation failure: 
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomsController.java:[756,72] cannot find symbol
+[ERROR]   symbol:   method generateRoomPhoneNumber(java.lang.String)
+[ERROR]   location: variable districtSettingsService of type com.heronix.scheduler.service.DistrictSettingsService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomsController.java:[880,44] cannot find symbol
+[ERROR]   symbol:   method exportRoomsToCSV(javafx.collections.ObservableList<com.heronix.scheduler.model.domain.Room>)
+[ERROR]   location: variable exportService of type com.heronix.scheduler.service.ExportService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[168,13] cannot find symbol
+[ERROR]   symbol:   method manualOverride(boolean)
+[ERROR]   location: class com.heronix.scheduler.model.domain.StudentLunchAssignment.StudentLunchAssignmentBuilder
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[1045,19] method markAsManualOverride in class com.heronix.scheduler.model.domain.StudentLunchAssignment cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[1117,13] cannot find symbol
+[ERROR]   symbol:   method isDutyFree(boolean)
+[ERROR]   location: class com.heronix.scheduler.model.domain.TeacherLunchAssignment.TeacherLunchAssignmentBuilder
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[1162,19] method assignSupervisionDuty in class com.heronix.scheduler.model.domain.TeacherLunchAssignment cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.lang.String,java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchAssignmentServiceImpl.java:[1174,19] method removeSupervisionDuty in class com.heronix.scheduler.model.domain.TeacherLunchAssignment cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/ScheduleGenerationService.java:[1299,23] no suitable constructor found for LunchWave(int)
+[ERROR]     constructor com.heronix.scheduler.model.domain.LunchWave.LunchWave() is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR]     constructor com.heronix.scheduler.model.domain.LunchWave.LunchWave(java.lang.Long,com.heronix.scheduler.model.domain.Schedule,java.lang.String,java.lang.Integer,java.time.LocalTime,java.time.LocalTime,java.lang.Integer,java.lang.Integer,java.lang.Integer,java.lang.Boolean,com.heronix.scheduler.model.domain.Room,java.lang.String,java.util.List<com.heronix.scheduler.model.dto.LunchCohort>,java.lang.Double) is not applicable
+[ERROR]       (actual and formal argument lists differ in length)
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherAvailabilityDialogController.java:[84,85] incompatible types: java.util.List<java.lang.String> cannot be converted to java.util.List<com.heronix.scheduler.model.dto.UnavailableTimeBlock>
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherAvailabilityDialogController.java:[214,59] incompatible types: cannot infer type arguments for java.util.ArrayList<>
+[ERROR]     reason: inference variable E has incompatible bounds
+[ERROR]       equality constraints: java.lang.String
+[ERROR]       lower bounds: com.heronix.scheduler.model.dto.UnavailableTimeBlock
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherAvailabilityDialogController.java:[217,13] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.controller.TeacherAvailabilityDialogController
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherRoomPreferencesDialogController.java:[87,59] incompatible types: java.util.List<com.heronix.scheduler.model.domain.Room> cannot be converted to com.heronix.scheduler.model.dto.RoomPreferences
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/TeacherRoomPreferencesDialogController.java:[150,67] incompatible types: java.util.List<com.heronix.scheduler.model.domain.Room> cannot be converted to com.heronix.scheduler.model.dto.RoomPreferences
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/IntelligentCourseAssignmentService.java:[334,42] incompatible types: com.heronix.scheduler.model.domain.Course cannot be converted to java.lang.Double
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/IntelligentCourseAssignmentService.java:[376,20] method approve in class com.heronix.scheduler.model.domain.CourseEnrollmentRequest cannot be applied to given types;
+[ERROR]   required: java.lang.String
+[ERROR]   found:    java.lang.String,java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/IntelligentCourseAssignmentService.java:[456,65] incompatible types: com.heronix.scheduler.model.domain.Course cannot be converted to java.lang.Double
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/IntelligentCourseAssignmentService.java:[474,33] method approve in class com.heronix.scheduler.model.domain.CourseEnrollmentRequest cannot be applied to given types;
+[ERROR]   required: java.lang.String
+[ERROR]   found:    java.lang.String,java.lang.String
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1271,50] method isAvailableAt in class com.heronix.scheduler.model.domain.Teacher cannot be applied to given types;
+[ERROR]   required: java.lang.String
+[ERROR]   found:    java.time.DayOfWeek,java.time.LocalTime
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1397,103] incompatible types: java.util.List<com.heronix.scheduler.model.domain.Room> cannot be converted to com.heronix.scheduler.model.dto.RoomPreferences
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1763,47] cannot find symbol
+[ERROR]   symbol:   method getRoom()
+[ERROR]   location: variable assignment of type com.heronix.scheduler.model.domain.Room
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1764,47] cannot find symbol
+[ERROR]   symbol:   method getRoom()
+[ERROR]   location: variable assignment of type com.heronix.scheduler.model.domain.Room
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1833,120] incompatible types: com.heronix.scheduler.model.domain.Room cannot be converted to com.heronix.scheduler.model.domain.CourseRoomAssignment
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/SchedulingConstraintProvider.java:[1917,124] incompatible types: com.heronix.scheduler.model.domain.Room cannot be converted to com.heronix.scheduler.model.domain.CourseRoomAssignment
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ConflictDashboardController.java:[1237,73] package com.heronix.security does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[388,76] incompatible types: com.heronix.scheduler.model.domain.Course cannot be converted to java.lang.Long
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[503,34] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[521,9] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[562,34] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[602,9] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/MasterScheduleServiceImpl.java:[707,32] cannot find symbol
+[ERROR]   symbol:   variable courseRepository
+[ERROR]   location: class com.heronix.scheduler.service.impl.MasterScheduleServiceImpl
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/FitnessEvaluator.java:[180,48] incompatible types: java.lang.Double cannot be converted to int
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleGeneratorController.java:[1101,36] cannot find symbol
+[ERROR]   symbol:   method showDialog(javafx.stage.Window)
+[ERROR]   location: variable fixViolationsDialog of type com.heronix.scheduler.ui.dialog.FixViolationsDialog
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/RoomEquipmentService.java:[181,73] cannot find symbol
+[ERROR]   symbol:   method getDisplayName()
+[ERROR]   location: class java.lang.String
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/RoomEquipmentService.java:[298,69] cannot find symbol
+[ERROR]   symbol:   method getDisplayName()
+[ERROR]   location: class java.lang.String
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SpecialDutyRosterController.java:[704,42] constructor TimePickerField in class com.heronix.scheduler.ui.components.TimePickerField cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.time.LocalTime
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SpecialDutyRosterController.java:[705,40] constructor TimePickerField in class com.heronix.scheduler.ui.components.TimePickerField cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.time.LocalTime
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SpecialDutyRosterController.java:[709,34] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.controller.ui.SpecialDutyRosterController
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleSlotEditDialogController.java:[139,34] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.controller.ui.ScheduleSlotEditDialogController
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleSlotEditDialogController.java:[297,78] cannot find symbol
+[ERROR]   symbol:   method getDisplayName()
+[ERROR]   location: class java.lang.String
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleSlotEditDialogController.java:[517,17] cannot find symbol
+[ERROR]   symbol:   variable courseRepository
+[ERROR]   location: class com.heronix.scheduler.controller.ui.ScheduleSlotEditDialogController
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchPeriodServiceImpl.java:[204,20] cannot find symbol
+[ERROR]   symbol:   method getScheduleSlots()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/LunchPeriodServiceImpl.java:[206,23] cannot find symbol
+[ERROR]   symbol:   method getScheduleSlots()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EnhancedScheduleViewController.java:[1330,49] cannot find symbol
+[ERROR]   symbol:   method resolveConflict(com.heronix.scheduler.model.domain.Schedule,com.heronix.scheduler.model.domain.ScheduleSlot,com.heronix.scheduler.model.domain.TimeSlot)
+[ERROR]   location: variable hybridSolver of type com.heronix.scheduler.ui.controller.EnhancedHybridScheduler
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/solver/HybridSchedulingSolver.java:[378,40] cannot find symbol
+[ERROR]   symbol:   class ScheduleNotFoundException
+[ERROR]   location: class com.heronix.scheduler.solver.HybridSchedulingSolver
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SmartRoomAssignmentService.java:[88,27] cannot find symbol
+[ERROR]   symbol:   method setRoom(com.heronix.scheduler.model.domain.Room)
+[ERROR]   location: variable course of type com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SmartRoomAssignmentService.java:[89,21] cannot find symbol
+[ERROR]   symbol:   variable courseRepository
+[ERROR]   location: class com.heronix.scheduler.service.SmartRoomAssignmentService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SubstituteScheduleGeneratorService.java:[286,35] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.service.SubstituteScheduleGeneratorService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SubstituteScheduleGeneratorService.java:[303,16] cannot find symbol
+[ERROR]   symbol:   method setPhoneNumber(java.lang.String)
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SubstituteScheduleGeneratorService.java:[307,16] cannot find symbol
+[ERROR]   symbol:   method setTeacherRole(java.lang.String)
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/SubstituteScheduleGeneratorService.java:[310,16] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.service.SubstituteScheduleGeneratorService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleEditorController.java:[325,39] package com.heronix.model.dto does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleEditorController.java:[330,21] no suitable method found for collect(java.util.stream.Collector<java.lang.CharSequence,capture#1 of ?,java.lang.String>)
+[ERROR]     method java.util.stream.Stream.<R>collect(java.util.function.Supplier<R>,java.util.function.BiConsumer<R,? super java.lang.Object>,java.util.function.BiConsumer<R,R>) is not applicable
+[ERROR]       (cannot infer type-variable(s) R
+[ERROR]         (actual and formal argument lists differ in length))
+[ERROR]     method java.util.stream.Stream.<R,A>collect(java.util.stream.Collector<? super java.lang.Object,A,R>) is not applicable
+[ERROR]       (cannot infer type-variable(s) R,A
+[ERROR]         (argument mismatch; java.util.stream.Collector<java.lang.CharSequence,capture#2 of ?,java.lang.String> cannot be converted to java.util.stream.Collector<? super java.lang.Object,A,R>))
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleEditorController.java:[418,39] package com.heronix.model.dto does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleEditorController.java:[423,21] no suitable method found for collect(java.util.stream.Collector<java.lang.CharSequence,capture#3 of ?,java.lang.String>)
+[ERROR]     method java.util.stream.Stream.<R>collect(java.util.function.Supplier<R>,java.util.function.BiConsumer<R,? super java.lang.Object>,java.util.function.BiConsumer<R,R>) is not applicable
+[ERROR]       (cannot infer type-variable(s) R
+[ERROR]         (actual and formal argument lists differ in length))
+[ERROR]     method java.util.stream.Stream.<R,A>collect(java.util.stream.Collector<? super java.lang.Object,A,R>) is not applicable
+[ERROR]       (cannot infer type-variable(s) R,A
+[ERROR]         (argument mismatch; java.util.stream.Collector<java.lang.CharSequence,capture#4 of ?,java.lang.String> cannot be converted to java.util.stream.Collector<? super java.lang.Object,A,R>))
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewController.java:[641,55] cannot find symbol
+[ERROR]   symbol:   method renderWeeklyGrid(java.util.List<com.heronix.scheduler.model.domain.ScheduleSlot>,java.time.LocalTime,java.time.LocalTime,int)
+[ERROR]   location: class com.heronix.scheduler.ui.component.ModernCalendarGrid
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewController.java:[692,50] cannot find symbol
+[ERROR]   symbol:   method renderDailyGrid(java.util.List<com.heronix.scheduler.model.domain.ScheduleSlot>,java.time.DayOfWeek,java.time.LocalTime,java.time.LocalTime,int)
+[ERROR]   location: class com.heronix.scheduler.ui.component.ModernCalendarGrid
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[614,59] package com.heronix.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[879,58] package com.heronix.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1124,50] cannot find symbol
+[ERROR]   symbol:   class ExportFormat
+[ERROR]   location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1129,63] cannot find symbol
+[ERROR]   symbol:   class ExportFormat
+[ERROR]   location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1133,63] cannot find symbol
+[ERROR]   symbol:   class ExportFormat
+[ERROR]   location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1137,63] cannot find symbol
+[ERROR]   symbol:   class ExportFormat
+[ERROR]   location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1141,63] cannot find symbol
+[ERROR]   symbol:   class ExportFormat
+[ERROR]   location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1145,63] cannot find symbol
+[ERROR]   symbol:   class ExportFormat
+[ERROR]   location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1149,63] cannot find symbol
+[ERROR]   symbol:   class ExportFormat
+[ERROR]   location: package com.heronix.scheduler.model.enums
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/SchedulesController.java:[1361,46] package com.heronix.ui.controller.dialogs does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[265,32] cannot find symbol
+[ERROR]   symbol:   method getPreferredBreakMinutes()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[265,78] cannot find symbol
+[ERROR]   symbol:   method getPreferredBreakMinutes()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[273,40] cannot find symbol
+[ERROR]   symbol:   method getPreferredBreakMinutes()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[390,45] cannot find symbol
+[ERROR]   symbol:   method getMaxConsecutiveHours()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[390,88] cannot find symbol
+[ERROR]   symbol:   method getMaxConsecutiveHours()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[638,23] cannot find symbol
+[ERROR]   symbol:   method getRequiredResources()
+[ERROR]   location: variable course of type com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[638,65] cannot find symbol
+[ERROR]   symbol:   method getRequiredResources()
+[ERROR]   location: variable course of type com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[639,42] cannot find symbol
+[ERROR]   symbol:   method getRequiredResources()
+[ERROR]   location: variable course of type com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[1027,73] cannot find symbol
+[ERROR]   symbol:   method getPrerequisites()
+[ERROR]   location: class com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[1028,40] cannot find symbol
+[ERROR]   symbol:   method getPrerequisites()
+[ERROR]   location: class com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ConflictDetectorServiceImpl.java:[1034,62] cannot find symbol
+[ERROR]   symbol:   method getPrerequisites()
+[ERROR]   location: class com.heronix.scheduler.model.domain.Course
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomManagementController.java:[102,28] package com.heronix.ui.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomManagementController.java:[105,43] package com.heronix.ui.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/RoomManagementController.java:[459,44] cannot find symbol
+[ERROR]   symbol:   method exportRoomsToExcel(javafx.collections.ObservableList<com.heronix.scheduler.model.domain.Room>)
+[ERROR]   location: variable exportService of type com.heronix.scheduler.service.ExportService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/ScheduleIssueDetector.java:[363,21] incompatible types: unexpected instance method <T>isUnassigned(T) found in unbound lookup
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[60,20] cannot find symbol
+[ERROR]   symbol:   method getPhoneNumber()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[60,76] cannot find symbol
+[ERROR]   symbol:   method getPhoneNumber()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[68,20] cannot find symbol
+[ERROR]   symbol:   method getMaxConsecutiveHours()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[72,20] cannot find symbol
+[ERROR]   symbol:   method getPreferredBreakMinutes()
+[ERROR]   location: variable teacher of type com.heronix.scheduler.model.domain.Teacher
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[170,20] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable student of type com.heronix.scheduler.model.domain.Student
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/util/ValidationUtil.java:[170,64] cannot find symbol
+[ERROR]   symbol:   method getEmail()
+[ERROR]   location: variable student of type com.heronix.scheduler.model.domain.Student
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/OptimizationServiceImpl.java:[206,86] incompatible types: int cannot be converted to java.lang.Double
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/OptimizationServiceImpl.java:[350,13] cannot find symbol
+[ERROR]   symbol:   method useParallelProcessing(boolean)
+[ERROR]   location: class com.heronix.scheduler.model.domain.OptimizationConfig.OptimizationConfigBuilder
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/service/impl/ComplianceValidationService.java:[255,43] cannot find symbol
+[ERROR]   symbol:   variable teacherRepository
+[ERROR]   location: class com.heronix.scheduler.service.impl.ComplianceValidationService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewerController.java:[981,78] package com.heronix.ui.component does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewerController.java:[1304,63] package com.heronix.ui.component does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/ScheduleViewerController.java:[1311,63] package com.heronix.ui.component does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EnhancedHybridScheduler.java:[411,46] package com.heronix.solver.exception does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EnhancedHybridScheduler.java:[416,46] package com.heronix.solver.exception does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[133,28] package com.heronix.ui.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[136,43] package com.heronix.ui.util does not exist
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[634,44] cannot find symbol
+[ERROR]   symbol:   method exportEventsToICal(javafx.collections.ObservableList<com.heronix.scheduler.model.domain.Event>)
+[ERROR]   location: variable exportService of type com.heronix.scheduler.service.ExportService
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[685,42] constructor TimePickerField in class com.heronix.scheduler.ui.components.TimePickerField cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.time.LocalTime
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] /H:/Heronix/Heronix-SchedulerV2/src/main/java/com/heronix/scheduler/controller/ui/EventsController.java:[690,40] constructor TimePickerField in class com.heronix.scheduler.ui.components.TimePickerField cannot be applied to given types;
+[ERROR]   required: no arguments
+[ERROR]   found:    java.time.LocalTime
+[ERROR]   reason: actual and formal argument lists differ in length
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

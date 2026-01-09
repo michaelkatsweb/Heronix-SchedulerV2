@@ -1,0 +1,268 @@
+# ============================================================================
+# Heronix AI Scheduling Engine - Application Configuration
+# ============================================================================
+# Port: 8090
+# Purpose: AI-Powered Schedule Optimization using OptaPlanner
+# Database: PostgreSQL (production) / H2 (development)
+# ============================================================================
+
+server:
+  port: 8090
+  servlet:
+    context-path: /
+  shutdown: graceful
+
+spring:
+  application:
+    name: heronix-scheduler
+
+  profiles:
+    active: dev
+
+  # Database Configuration
+  datasource:
+    url: jdbc:h2:file:./data/heronix_scheduler
+    username: admin
+    password: admin123
+    driver-class-name: org.h2.Driver
+
+  # H2 Console (Development only)
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  # JPA/Hibernate Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+        use_sql_comments: true
+    open-in-view: false
+
+  # Flyway Database Migrations
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+
+  # Jackson JSON Configuration
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+      indent-output: true
+    deserialization:
+      fail-on-unknown-properties: false
+    default-property-inclusion: non_null
+
+  # Caching
+  cache:
+    type: simple
+
+  # File Upload
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+# Actuator Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,optaplanner
+  endpoint:
+    health:
+      show-details: when-authorized
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# API Documentation (Swagger/OpenAPI)
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: true
+  show-actuator: true
+
+# OptaPlanner Configuration
+optaplanner:
+  solver:
+    # Termination Configuration
+    termination:
+      spent-limit: 120s  # 2 minutes max solve time
+      unimproved-spent-limit: 30s  # Stop if no improvement for 30s
+      best-score-limit: 0hard/0soft  # Perfect score (if achieved)
+
+    # Solver Configuration
+    move-thread-count: AUTO
+    environment-mode: FAST_ASSERT
+
+    # Daemon mode (for background solving)
+    daemon: true
+
+  # Solver Manager Configuration
+  solver-manager:
+    parallel-solver-count: 4
+
+# Logging Configuration
+logging:
+  level:
+    root: INFO
+    com.heronix.scheduler: DEBUG
+    org.springframework.web: INFO
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.optaplanner: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/heronix-scheduler.log
+    max-size: 10MB
+    max-history: 30
+
+# Application-Specific Configuration
+heronix:
+  scheduler:
+    # SIS Integration Configuration
+    sis:
+      api-url: http://localhost:8080/api
+      timeout: 30000  # 30 seconds
+      retry-attempts: 3
+      retry-delay: 5000  # 5 seconds
+
+    # Scheduling Configuration
+    scheduling:
+      # Constraint Weights (can be adjusted)
+      constraints:
+        teacher-conflict-weight: -1  # Hard constraint
+        room-conflict-weight: -1  # Hard constraint
+        room-capacity-weight: -1  # Hard constraint
+        teacher-qualification-weight: -10  # Soft constraint
+        teacher-preference-weight: -5  # Soft constraint
+        minimize-gaps-weight: -2  # Soft constraint
+
+      # Default Parameters
+      default:
+        max-consecutive-periods: 3
+        max-daily-teaching-periods: 6
+        min-planning-periods: 1
+        lunch-capacity-limit: 300
+
+      # Schedule Generation
+      generation:
+        auto-save: true
+        auto-publish: false
+        keep-history: true
+        max-history-versions: 10
+
+    # Optimization Configuration
+    optimization:
+      # AI Model Configuration (Ollama)
+      ai:
+        enabled: false
+        base-url: http://localhost:11434
+        model: mistral
+        timeout: 60000  # 60 seconds
+
+      # Performance Tuning
+      performance:
+        enable-incremental-solving: true
+        enable-nearby-selection: true
+        enable-multi-threading: true
+
+    # Conflict Detection
+    conflict:
+      auto-detect: true
+      auto-resolve: false
+      severity-levels:
+        - CRITICAL
+        - HIGH
+        - MEDIUM
+        - LOW
+
+    # Export Configuration
+    export:
+      formats: pdf,csv,excel,ical
+      include-conflicts: true
+      include-metrics: true
+
+---
+# ============================================================================
+# Production Profile
+# ============================================================================
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/heronix_scheduler
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  h2:
+    console:
+      enabled: false
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  flyway:
+    enabled: true
+
+optaplanner:
+  solver:
+    termination:
+      spent-limit: 300s  # 5 minutes in production
+      unimproved-spent-limit: 60s
+
+logging:
+  level:
+    root: WARN
+    com.heronix.scheduler: INFO
+    org.springframework.web: WARN
+    org.hibernate.SQL: WARN
+    org.optaplanner: INFO
+
+---
+# ============================================================================
+# Test Profile
+# ============================================================================
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+optaplanner:
+  solver:
+    termination:
+      spent-limit: 10s  # Fast for tests
+
+logging:
+  level:
+    com.heronix.scheduler: DEBUG
+    org.optaplanner: DEBUG
