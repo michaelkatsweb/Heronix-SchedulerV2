@@ -29,7 +29,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/api/events")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"http://localhost:9580", "http://localhost:9585", "http://localhost:9590", "http://localhost:58280", "http://localhost:58180"})
 public class EventController {
 
     @Autowired
