@@ -36,10 +36,12 @@ public class CourseEnrollmentRequest {
     @Column(name = "course_id", nullable = false)
     private Long courseId;
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", insertable = false, updatable = false)
     private Student student;
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", insertable = false, updatable = false)
     private Course course;
 
     @Column(name = "preference_rank")
@@ -149,14 +151,14 @@ public class CourseEnrollmentRequest {
     }
 
     /**
-     * Get student (transient field)
+     * Get student entity
      */
     public Student getStudent() {
         return student;
     }
 
     /**
-     * Get course (transient field)
+     * Get course entity
      */
     public Course getCourse() {
         return course;

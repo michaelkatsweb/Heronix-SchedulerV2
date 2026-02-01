@@ -35,6 +35,7 @@ import java.util.Map;
 @ComponentScan(basePackages = "com.heronix")
 @EntityScan(basePackages = "com.heronix.model")
 @EnableJpaRepositories(basePackages = "com.heronix.repository")
+@org.springframework.boot.autoconfigure.condition.ConditionalOnProperty(name = "heronix.assign-courses", havingValue = "true")
 public class AssignCoursesToTeachers implements CommandLineRunner {
 
     @Autowired
@@ -85,7 +86,7 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
             "SELECT t.id, t.first_name, t.last_name, t.department, " +
             "COUNT(c.id) as assigned_courses " +
             "FROM teachers t " +
-            "LEFT JOIN courses c ON c.teacher_id = t.id " +
+            "LEFT JOIN courses c ON c.assigned_teacher_id = t.id " +
             "WHERE t.active = TRUE " +
             "GROUP BY t.id, t.first_name, t.last_name, t.department " +
             "ORDER BY t.department, t.last_name"
@@ -102,7 +103,7 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         }
 
         Integer unassignedCount = jdbcTemplate.queryForObject(
-            "SELECT COUNT(*) FROM courses WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0)",
+            "SELECT COUNT(*) FROM courses WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0)",
             Integer.class
         );
 
@@ -115,12 +116,12 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         // MATHEMATICS
         log.info("Assigning Mathematics courses...");
         int mathAssigned = jdbcTemplate.update(
-            "UPDATE courses SET teacher_id = (" +
+            "UPDATE courses SET assigned_teacher_id = (" +
             "  SELECT t.id FROM teachers t " +
             "  WHERE t.active = TRUE AND UPPER(t.department) LIKE '%MATH%' " +
             "  ORDER BY (SELECT COUNT(*) FROM courses c2 WHERE c2.teacher_id = t.id) ASC " +
             "  LIMIT 1" +
-            ") WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0) " +
+            ") WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0) " +
             "AND (UPPER(subject) LIKE '%MATH%' OR UPPER(subject) LIKE '%ALGEBRA%' " +
             "OR UPPER(subject) LIKE '%GEOMETRY%' OR UPPER(subject) LIKE '%CALCULUS%' " +
             "OR UPPER(course_code) LIKE 'MATH%' OR UPPER(course_code) LIKE 'ALG%')"
@@ -131,12 +132,12 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         // SCIENCE
         log.info("Assigning Science courses...");
         int scienceAssigned = jdbcTemplate.update(
-            "UPDATE courses SET teacher_id = (" +
+            "UPDATE courses SET assigned_teacher_id = (" +
             "  SELECT t.id FROM teachers t " +
             "  WHERE t.active = TRUE AND UPPER(t.department) LIKE '%SCIENCE%' " +
             "  ORDER BY (SELECT COUNT(*) FROM courses c2 WHERE c2.teacher_id = t.id) ASC " +
             "  LIMIT 1" +
-            ") WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0) " +
+            ") WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0) " +
             "AND (UPPER(subject) LIKE '%SCIENCE%' OR UPPER(subject) LIKE '%BIOLOGY%' " +
             "OR UPPER(subject) LIKE '%CHEMISTRY%' OR UPPER(subject) LIKE '%PHYSICS%' " +
             "OR UPPER(course_code) LIKE 'SCI%' OR UPPER(course_code) LIKE 'BIO%')"
@@ -147,12 +148,12 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         // ENGLISH
         log.info("Assigning English courses...");
         int englishAssigned = jdbcTemplate.update(
-            "UPDATE courses SET teacher_id = (" +
+            "UPDATE courses SET assigned_teacher_id = (" +
             "  SELECT t.id FROM teachers t " +
             "  WHERE t.active = TRUE AND UPPER(t.department) LIKE '%ENGLISH%' " +
             "  ORDER BY (SELECT COUNT(*) FROM courses c2 WHERE c2.teacher_id = t.id) ASC " +
             "  LIMIT 1" +
-            ") WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0) " +
+            ") WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0) " +
             "AND (UPPER(subject) LIKE '%ENGLISH%' OR UPPER(subject) LIKE '%LITERATURE%' " +
             "OR UPPER(course_code) LIKE 'ENG%' OR UPPER(course_code) LIKE 'LIT%')"
         );
@@ -162,12 +163,12 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         // SOCIAL STUDIES
         log.info("Assigning Social Studies courses...");
         int socialAssigned = jdbcTemplate.update(
-            "UPDATE courses SET teacher_id = (" +
+            "UPDATE courses SET assigned_teacher_id = (" +
             "  SELECT t.id FROM teachers t " +
             "  WHERE t.active = TRUE AND (UPPER(t.department) LIKE '%SOCIAL%' OR UPPER(t.department) LIKE '%HISTORY%') " +
             "  ORDER BY (SELECT COUNT(*) FROM courses c2 WHERE c2.teacher_id = t.id) ASC " +
             "  LIMIT 1" +
-            ") WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0) " +
+            ") WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0) " +
             "AND (UPPER(subject) LIKE '%HISTORY%' OR UPPER(subject) LIKE '%SOCIAL%' " +
             "OR UPPER(course_code) LIKE 'SS%' OR UPPER(course_code) LIKE 'HIST%')"
         );
@@ -177,12 +178,12 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         // WORLD LANGUAGES
         log.info("Assigning World Languages courses...");
         int languageAssigned = jdbcTemplate.update(
-            "UPDATE courses SET teacher_id = (" +
+            "UPDATE courses SET assigned_teacher_id = (" +
             "  SELECT t.id FROM teachers t " +
             "  WHERE t.active = TRUE AND (UPPER(t.department) LIKE '%LANGUAGE%' OR UPPER(t.department) LIKE '%WORLD%') " +
             "  ORDER BY (SELECT COUNT(*) FROM courses c2 WHERE c2.teacher_id = t.id) ASC " +
             "  LIMIT 1" +
-            ") WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0) " +
+            ") WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0) " +
             "AND (UPPER(subject) LIKE '%SPANISH%' OR UPPER(subject) LIKE '%FRENCH%' " +
             "OR UPPER(course_code) LIKE 'SPAN%' OR UPPER(course_code) LIKE 'FREN%')"
         );
@@ -192,12 +193,12 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         // ARTS
         log.info("Assigning Arts courses...");
         int artsAssigned = jdbcTemplate.update(
-            "UPDATE courses SET teacher_id = (" +
+            "UPDATE courses SET assigned_teacher_id = (" +
             "  SELECT t.id FROM teachers t " +
             "  WHERE t.active = TRUE AND (UPPER(t.department) LIKE '%ART%' OR UPPER(t.department) LIKE '%MUSIC%') " +
             "  ORDER BY (SELECT COUNT(*) FROM courses c2 WHERE c2.teacher_id = t.id) ASC " +
             "  LIMIT 1" +
-            ") WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0) " +
+            ") WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0) " +
             "AND (UPPER(subject) LIKE '%ART%' OR UPPER(subject) LIKE '%MUSIC%' " +
             "OR UPPER(course_code) LIKE 'ART%' OR UPPER(course_code) LIKE 'MUS%')"
         );
@@ -207,12 +208,12 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         // PHYSICAL EDUCATION
         log.info("Assigning Physical Education courses...");
         int peAssigned = jdbcTemplate.update(
-            "UPDATE courses SET teacher_id = (" +
+            "UPDATE courses SET assigned_teacher_id = (" +
             "  SELECT t.id FROM teachers t " +
             "  WHERE t.active = TRUE AND (UPPER(t.department) LIKE '%PE%' OR UPPER(t.department) LIKE '%PHYSICAL%') " +
             "  ORDER BY (SELECT COUNT(*) FROM courses c2 WHERE c2.teacher_id = t.id) ASC " +
             "  LIMIT 1" +
-            ") WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0) " +
+            ") WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0) " +
             "AND (UPPER(subject) LIKE '%PHYSICAL%' OR UPPER(subject) LIKE '%PE%' " +
             "OR UPPER(course_code) LIKE 'PE%' OR UPPER(course_code) LIKE 'HEALTH%')"
         );
@@ -222,12 +223,12 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         // TECHNOLOGY
         log.info("Assigning Technology courses...");
         int techAssigned = jdbcTemplate.update(
-            "UPDATE courses SET teacher_id = (" +
+            "UPDATE courses SET assigned_teacher_id = (" +
             "  SELECT t.id FROM teachers t " +
             "  WHERE t.active = TRUE AND (UPPER(t.department) LIKE '%TECH%' OR UPPER(t.department) LIKE '%COMPUTER%') " +
             "  ORDER BY (SELECT COUNT(*) FROM courses c2 WHERE c2.teacher_id = t.id) ASC " +
             "  LIMIT 1" +
-            ") WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0) " +
+            ") WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0) " +
             "AND (UPPER(subject) LIKE '%COMPUTER%' OR UPPER(subject) LIKE '%TECHNOLOGY%' " +
             "OR UPPER(course_code) LIKE 'CS%' OR UPPER(course_code) LIKE 'TECH%')"
         );
@@ -243,7 +244,7 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         List<Map<String, Object>> distribution = jdbcTemplate.queryForList(
             "SELECT t.first_name, t.last_name, t.department, COUNT(c.id) as assigned_courses " +
             "FROM teachers t " +
-            "LEFT JOIN courses c ON c.teacher_id = t.id AND c.active = TRUE " +
+            "LEFT JOIN courses c ON c.assigned_teacher_id = t.id AND c.active = TRUE " +
             "WHERE t.active = TRUE " +
             "GROUP BY t.id, t.first_name, t.last_name, t.department " +
             "HAVING COUNT(c.id) > 0 " +
@@ -260,7 +261,7 @@ public class AssignCoursesToTeachers implements CommandLineRunner {
         }
 
         Integer remainingUnassigned = jdbcTemplate.queryForObject(
-            "SELECT COUNT(*) FROM courses WHERE active = TRUE AND (teacher_id IS NULL OR teacher_id = 0)",
+            "SELECT COUNT(*) FROM courses WHERE active = TRUE AND (assigned_teacher_id IS NULL OR assigned_teacher_id = 0)",
             Integer.class
         );
 

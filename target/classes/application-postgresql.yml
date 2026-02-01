@@ -1,0 +1,35 @@
+# ============================================================================
+# Heronix SchedulerV2 - PostgreSQL Profile
+# ============================================================================
+# Activate with: --spring.profiles.active=postgresql
+# ============================================================================
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/heronix_scheduler
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME:heronix}
+    password: ${DB_PASSWORD:heronix_dev}
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      connection-timeout: 30000
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          batch_size: 20
+
+  flyway:
+    enabled: false
+
+  h2:
+    console:
+      enabled: false

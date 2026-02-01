@@ -16,21 +16,23 @@ spring:
   application:
     name: heronix-scheduler
 
-  profiles:
-    active: dev
-
-  # Database Configuration
+  # Database Configuration (PostgreSQL default)
   datasource:
-    url: jdbc:h2:file:./data/heronix_scheduler
-    username: admin
-    password: admin123
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/heronix_scheduler
+    driver-class-name: org.postgresql.Driver
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      connection-timeout: 30000
 
-  # H2 Console (Development only)
+  # H2 Console (disabled by default, enable with h2 profile)
   h2:
     console:
-      enabled: true
-      path: /h2-console
+      enabled: false
 
   # JPA/Hibernate Configuration
   jpa:
@@ -39,7 +41,7 @@ spring:
     show-sql: false
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
         use_sql_comments: true
     open-in-view: false
@@ -133,7 +135,7 @@ heronix:
   scheduler:
     # SIS Integration Configuration
     sis:
-      api-url: http://localhost:8080/api
+      api-url: http://localhost:9580/api
       timeout: 30000  # 30 seconds
       retry-attempts: 3
       retry-delay: 5000  # 5 seconds
@@ -196,30 +198,16 @@ heronix:
 
 ---
 # ============================================================================
-# Production Profile
+# Production Profile (PostgreSQL is already default; this tightens settings)
 # ============================================================================
 spring:
   config:
     activate:
       on-profile: prod
 
-  datasource:
-    url: jdbc:postgresql://localhost:5432/heronix_scheduler
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-    driver-class-name: org.postgresql.Driver
-
-  h2:
-    console:
-      enabled: false
-
   jpa:
     hibernate:
       ddl-auto: validate
-    show-sql: false
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
 
   flyway:
     enabled: true

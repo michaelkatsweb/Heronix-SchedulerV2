@@ -2,32 +2,29 @@ package com.heronix.scheduler.util;
 
 /**
  * Authentication Context Utility
- * Provides current user information for the application
- *
- * @author Heronix Scheduling System Team
- * @version 1.0.0
+ * Provides current user information for the application.
+ * Uses thread-local storage so login screens can set the current user.
  */
 public class AuthenticationContext {
 
-    /**
-     * Get the current username
-     * TODO: Integrate with actual authentication system
-     *
-     * @return current username or "system" as default
-     */
+    private static final ThreadLocal<String> currentUsername = ThreadLocal.withInitial(() -> System.getProperty("user.name", "system"));
+    private static final ThreadLocal<Long> currentUserId = ThreadLocal.withInitial(() -> 1L);
+
     public static String getCurrentUsername() {
-        // TODO: Integrate with actual security/authentication system
-        return "system";
+        return currentUsername.get();
     }
 
-    /**
-     * Get the current user ID
-     * TODO: Integrate with actual authentication system
-     *
-     * @return current user ID or 1L as default
-     */
     public static Long getCurrentUserId() {
-        // TODO: Integrate with actual security/authentication system
-        return 1L;
+        return currentUserId.get();
+    }
+
+    public static void setCurrentUser(String username, Long userId) {
+        currentUsername.set(username);
+        currentUserId.set(userId);
+    }
+
+    public static void clear() {
+        currentUsername.remove();
+        currentUserId.remove();
     }
 }

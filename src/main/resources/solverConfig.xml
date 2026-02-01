@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<solver xmlns="https://www.optaplanner.org/xsd/solver" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://www.optaplanner.org/xsd/solver https://www.optaplanner.org/xsd/solver/solver.xsd">
+
+  <solutionClass>com.heronix.scheduler.model.planning.SchedulingSolution</solutionClass>
+  <entityClass>com.heronix.scheduler.model.domain.ScheduleSlot</entityClass>
+
+  <scoreDirectorFactory>
+    <constraintProviderClass>com.heronix.scheduler.solver.SchedulingConstraintProvider</constraintProviderClass>
+  </scoreDirectorFactory>
+
+  <termination>
+    <spentLimit>2m</spentLimit>
+    <unimprovedSpentLimit>30s</unimprovedSpentLimit>
+  </termination>
+
+</solver>

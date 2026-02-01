@@ -34,10 +34,12 @@ public class Waitlist {
     @Column(name = "schedule_slot_id")
     private Long scheduleSlotId;
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id", insertable = false, updatable = false)
     private Student student;
 
-    @Transient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", insertable = false, updatable = false)
     private Course course;
 
     @Column(name = "position", nullable = false)
@@ -63,14 +65,7 @@ public class Waitlist {
     private Boolean notificationSent = false;
 
     /**
-     * Get student (transient field)
-     */
-    public Student getStudent() {
-        return student;
-    }
-
-    /**
-     * Set student (transient field)
+     * Set student and sync studentId
      */
     public void setStudent(Student student) {
         this.student = student;
@@ -80,7 +75,7 @@ public class Waitlist {
     }
 
     /**
-     * Set course (transient field)
+     * Set course and sync courseId
      */
     public void setCourse(Course course) {
         this.course = course;
