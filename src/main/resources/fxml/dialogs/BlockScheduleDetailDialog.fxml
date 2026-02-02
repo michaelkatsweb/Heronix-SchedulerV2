@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Separator?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.heronix.scheduler.controller.ui.dialogs.BlockScheduleDetailDialogController"
+            prefWidth="750" prefHeight="550">
+
+    <top>
+        <VBox spacing="8" style="-fx-background-color: #f0f4f8; -fx-padding: 15;">
+            <Label fx:id="scheduleNameLabel" text="Schedule Name" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Label text="Date Range:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="dateRangeLabel" text="--"/>
+                <Label text="Status:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="statusLabel" text="--"/>
+                <Label text="Total Slots:" style="-fx-font-weight: bold;"/>
+                <Label fx:id="slotsLabel" text="--"/>
+            </HBox>
+            <Separator/>
+            <GridPane hgap="20" vgap="5">
+                <Label text="Odd Day:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Label fx:id="oddDaySlotsLabel" text="--" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label fx:id="oddDayCoursesLabel" text="--" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+                <Label text="Even Day:" style="-fx-font-weight: bold;" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Label fx:id="evenDaySlotsLabel" text="--" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label fx:id="evenDayCoursesLabel" text="--" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+            </GridPane>
+        </VBox>
+    </top>
+
+    <center>
+        <TableView fx:id="coursesTable" BorderPane.alignment="CENTER">
+            <padding><Insets top="5" left="10" right="10" bottom="10"/></padding>
+            <columns>
+                <TableColumn fx:id="courseCodeColumn" text="Course Code" prefWidth="120"/>
+                <TableColumn fx:id="courseNameColumn" text="Course Name" prefWidth="200"/>
+                <TableColumn fx:id="dayTypeColumn" text="Day Type" prefWidth="100"/>
+                <TableColumn fx:id="teacherColumn" text="Teacher" prefWidth="170"/>
+                <TableColumn fx:id="studentsColumn" text="Students" prefWidth="80"/>
+            </columns>
+        </TableView>
+    </center>
+
+</BorderPane>
