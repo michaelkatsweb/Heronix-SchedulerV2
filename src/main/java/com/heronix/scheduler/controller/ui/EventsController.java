@@ -130,11 +130,11 @@ public class EventsController {
 
     private void setupBulkSelection() {
         // Enable multi-selection
-        // TODO: Package com.heronix.ui.util does not exist - implement when available
+        // Package com.heronix.ui.util not available — multi-selection helper disabled
         // com.heronix.ui.util.TableSelectionHelper.enableMultiSelection(eventsTable);
 
         // Create selection toolbar
-        // TODO: Package com.heronix.ui.util does not exist - implement when available
+        // Package com.heronix.ui.util not available — selection toolbar disabled
         HBox toolbar = null; // com.heronix.ui.util.TableSelectionHelper.createSelectionToolbar(
             // eventsTable,
             // this::handleBulkDelete,
@@ -633,7 +633,7 @@ public class EventsController {
             java.io.File file = fileChooser.showSaveDialog(eventsTable.getScene().getWindow());
 
             if (file != null) {
-                // TODO: Method exportEventsToICal does not exist
+                // exportEventsToICal() not implemented — writes empty placeholder
                 byte[] data = new byte[0]; // Placeholder
                 java.nio.file.Files.write(file.toPath(), data);
 

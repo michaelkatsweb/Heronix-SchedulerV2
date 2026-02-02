@@ -1177,7 +1177,7 @@ public class SchedulesController {
                     CompletableFuture.runAsync(() -> {
                         try {
                             // Call export service
-                            // TODO: exportService.exportSchedule() doesn't exist - use format-specific methods instead
+                            // exportService.exportSchedule() not available — placeholder until format-specific methods are wired
                             byte[] exportData = new byte[0]; // Placeholder
                             // byte[] exportData = exportService.exportSchedule(schedule.getId(), format);
 
@@ -1360,9 +1360,9 @@ public class SchedulesController {
             javafx.scene.control.DialogPane dialogPane = loader.load();
 
             // Get controller and set schedule
-            /* TODO: Package does not exist */ // com.heronix.ui.controller.dialogs.BlockScheduleDetailDialogController controller =
+            /* Package com.heronix.ui.controller.dialogs not available */ // com.heronix.ui.controller.dialogs.BlockScheduleDetailDialogController controller =
                 loader.getController();
-            // TODO: controller undefined
+            // Controller reference unavailable — dialog package not present
             // controller.setSchedule(schedule);
 
             javafx.scene.control.Dialog<javafx.scene.control.ButtonType> dialog =

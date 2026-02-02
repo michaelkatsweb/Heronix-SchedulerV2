@@ -261,7 +261,7 @@ public class ConflictDetectorServiceImpl implements ConflictDetectorService {
                     current.getEndTime().equals(next.getStartTime())) {
                     consecutiveCount++;
 
-                    // TODO: Teacher.getPreferredBreakMinutes() doesn't exist (from SIS)
+                    // Field not available on SIS Teacher entity — uses default 15-minute break
                     // For now, use default of 15 minutes preferred break
                     Integer preferredBreakMinutes = 15;
                     if (preferredBreakMinutes != null && preferredBreakMinutes > 0) {
@@ -389,7 +389,7 @@ public class ConflictDetectorServiceImpl implements ConflictDetectorService {
         for (Map.Entry<Long, List<ScheduleSlot>> entry : slotsByTeacher.entrySet()) {
             Teacher teacher = entry.getValue().get(0).getTeacher();
             List<ScheduleSlot> teacherSlots = entry.getValue();
-            // TODO: Teacher.getMaxConsecutiveHours() doesn't exist (from SIS), use default of 4
+            // Field not available on SIS Teacher entity — uses default max of 4 consecutive hours
             Integer maxConsecutive = 4;
 
             // Sort by day and time
@@ -637,7 +637,7 @@ public class ConflictDetectorServiceImpl implements ConflictDetectorService {
             Room room = slot.getRoom();
             Course course = slot.getCourse();
 
-            // TODO: Course.getRequiredResources() doesn't exist (from SIS)
+            // Field not available on SIS Course entity — resource/equipment check disabled
             // Would need to fetch from SIS API or store separately
             // Commenting out equipment check for now
             /*
@@ -1031,7 +1031,7 @@ public class ConflictDetectorServiceImpl implements ConflictDetectorService {
         // Get all enrollments for this schedule
         List<StudentEnrollment> enrollments = studentEnrollmentRepository.findByScheduleId(schedule.getId());
 
-        // TODO: Course.getPrerequisites() doesn't exist (from SIS)
+        // Field not available on SIS Course entity — prerequisite check disabled
         // Would need to fetch from SIS API
         // Commenting out prerequisite check for now
         /*

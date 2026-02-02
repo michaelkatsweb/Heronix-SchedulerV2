@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
  * - Pattern recognition for schedule data
  * - Automatic entity matching/creation
  *
- * TODO: EXTERNAL SIS FILE IMPORT SUPPORT
+ * FUTURE: EXTERNAL SIS FILE IMPORT SUPPORT
  * ======================================
  *
  * Currently supports PDF imports only. Expand to support file-based imports from

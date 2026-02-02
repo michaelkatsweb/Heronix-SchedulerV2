@@ -978,7 +978,7 @@ public class ScheduleViewerController {
         subjectSection.getChildren().add(subjectHeader);
 
         // Get actual colors from ModernCalendarGrid to ensure consistency
-        // TODO: ModernCalendarGrid.getSubjectColors() does not exist
+        // ModernCalendarGrid.getSubjectColors() not available — using empty map as fallback
         // java.util.Map<String, String> actualColors = com.heronix.scheduler.ui.component.ModernCalendarGrid.getSubjectColors();
         java.util.Map<String, String> actualColors = new java.util.HashMap<>();
 
@@ -1303,7 +1303,7 @@ public class ScheduleViewerController {
                             .filter(slot -> slot.getDayOfWeek() == selectedDay)
                             .collect(Collectors.toList());
 
-                    // TODO: ModernCalendarGrid.renderDailyGrid method signature doesn't match
+                    // ModernCalendarGrid.renderDailyGrid signature mismatch — using plain GridPane placeholder
                     calendarDisplay = new javafx.scene.layout.GridPane();
                     // calendarDisplay = com.heronix.scheduler.ui.component.ModernCalendarGrid.renderDailyGrid(
                     //         daySlots, selectedDay, startTime, endTime, slotDuration);
@@ -1312,7 +1312,7 @@ public class ScheduleViewerController {
                 case "Weekly View":
                 case "Monthly View": // Use weekly view for now
                 default:
-                    // TODO: ModernCalendarGrid.renderWeeklyGrid method signature doesn't match
+                    // ModernCalendarGrid.renderWeeklyGrid signature mismatch — using plain GridPane placeholder
                     calendarDisplay = new javafx.scene.layout.GridPane();
                     // calendarDisplay = com.heronix.scheduler.ui.component.ModernCalendarGrid.renderWeeklyGrid(
                     //         new ArrayList<>(scheduleSlots), startTime, endTime, slotDuration);

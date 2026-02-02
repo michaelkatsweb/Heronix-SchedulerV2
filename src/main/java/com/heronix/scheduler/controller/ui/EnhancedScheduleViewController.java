@@ -1327,7 +1327,7 @@ public class EnhancedScheduleViewController {
             try {
                 // âœ… FIXED: Changed HybridSchedulingSolver to EnhancedHybridScheduler
                 // Use hybrid solver to resolve conflicts
-                // TODO: resolveConflict method does not exist
+                // resolveConflict() not available on EnhancedHybridScheduler — conflict resolution disabled
                 // Schedule resolved = hybridSolver.resolveConflict(...);
 
                 Platform.runLater(() -> {

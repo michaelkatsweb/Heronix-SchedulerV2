@@ -99,11 +99,11 @@ public class RoomManagementController {
 
     private void setupBulkSelection() {
         // Enable multi-selection
-        // TODO: Package com.heronix.ui.util does not exist - implement when available
+        // Package com.heronix.ui.util not available — multi-selection helper disabled
         // com.heronix.ui.util.TableSelectionHelper.enableMultiSelection(roomTable);
 
         // Create selection toolbar
-        // TODO: Package com.heronix.ui.util does not exist - implement when available
+        // Package com.heronix.ui.util not available — selection toolbar disabled
         HBox toolbar = null; // com.heronix.ui.util.TableSelectionHelper.createSelectionToolbar(
             // roomTable,
             // this::handleBulkDelete,
@@ -458,7 +458,7 @@ public class RoomManagementController {
             java.io.File file = fileChooser.showSaveDialog(roomTable.getScene().getWindow());
 
             if (file != null) {
-                // TODO: Method exportRoomsToExcel() does not exist - implement when available
+                // exportRoomsToExcel() not available on export service — Excel export not yet implemented
                 // byte[] data = exportService.exportRoomsToExcel(roomTable.getItems());
                 // java.nio.file.Files.write(file.toPath(), data);
                 showError("Export Error", "Excel export not yet implemented");

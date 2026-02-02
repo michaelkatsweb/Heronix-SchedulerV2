@@ -30,7 +30,7 @@ import java.util.List;
  * - GET /api/enrollments - All enrollments
  * - GET /api/lunch-assignments - Lunch assignments
  *
- * TODO: EXTERNAL SIS INTEGRATION - ADAPTER PATTERN IMPLEMENTATION
+ * FUTURE: EXTERNAL SIS INTEGRATION - ADAPTER PATTERN IMPLEMENTATION
  * ================================================================
  *
  * To support external SIS systems (Skyward, PowerSchool, Infinite Campus, etc.),

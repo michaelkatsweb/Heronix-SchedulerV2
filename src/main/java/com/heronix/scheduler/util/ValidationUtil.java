@@ -57,14 +57,14 @@ public class ValidationUtil {
             errors.add("Invalid email format");
         }
 
-        // TODO: getPhoneNumber() doesn't exist on Teacher entity (from SIS)
+        // Field not available on SIS Teacher entity — phone validation skipped
         // Phone number validation would need to be done via SIS API
 
         if (teacher.getMaxHoursPerWeek() <= 0) {
             errors.add("Max hours per week must be positive");
         }
 
-        // TODO: getMaxConsecutiveHours() and getPreferredBreakMinutes() don't exist on Teacher entity (from SIS)
+        // Fields not available on SIS Teacher entity — scheduler-specific preferences stored separately
         // These are scheduler-specific preferences that would need to be stored separately
 
         return errors;
@@ -161,7 +161,7 @@ public class ValidationUtil {
             errors.add("Grade level is required");
         }
 
-        // TODO: getEmail() doesn't exist on Student entity (from SIS)
+        // Field not available on SIS Student entity — email validation skipped
         // Email validation would need to be done via SIS API
 
         return errors;

@@ -347,7 +347,7 @@ public class OptimizationServiceImpl implements OptimizationService {
             .tournamentSize(5)
             .maxRuntimeSeconds(300)
             .stagnationLimit(100)
-            // .useParallelProcessing(true) // TODO: Add this field to OptimizationConfig
+            // .useParallelProcessing(true) // Field not present on OptimizationConfig
             // .parallelThreadCount(4) // Method does not exist
             .logFrequency(10)
             .isDefault(true)

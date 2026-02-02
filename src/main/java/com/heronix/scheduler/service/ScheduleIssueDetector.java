@@ -360,7 +360,7 @@ public class ScheduleIssueDetector {
         List<AIIssue> issues = new ArrayList<>();
 
         // Note: Course doesn't have isUnassigned() method - filter differently
-        // TODO: Implement proper unassigned course detection
+        // Unassigned course detection not implemented — Course lacks isUnassigned() method
         List<Course> unassignedCourses = new ArrayList<>();
         // List<Course> unassignedCourses = sisDataService.getAllCourses().stream()
         //     .filter(course -> course.isUnassigned())

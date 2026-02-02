@@ -250,7 +250,7 @@ public class SmartCourseAssignmentService {
         String gradeLevel = course.getLevel() != null ? course.getLevel().toString() : "9";
 
         // ENHANCED: Use new SubjectCertification entity with grade-level validation
-        // TODO: Method hasCertificationForSubjectAndGrade does not exist - implement certification check
+        // hasCertificationForSubjectAndGrade() not available on Teacher — defaults to false
         boolean isCertifiedForCourse = false; // teacher.hasCertificationForSubjectAndGrade(course.getSubject(), gradeLevel);
 
         // Legacy string-based certification matching (still needed for detailed tracking)
@@ -315,7 +315,7 @@ public class SmartCourseAssignmentService {
 
         // ENHANCED: Warning for expiring certifications (minor penalty)
         int expirationPenalty = 0;
-        // TODO: Method hasExpiringCertifications does not exist - implement expiration check
+        // hasExpiringCertifications() not available on Teacher — expiration check disabled
         if (isCertifiedForCourse && false) { // teacher.hasExpiringCertifications()) {
             expirationPenalty = 5; // Small penalty, still qualified
         }
@@ -374,7 +374,7 @@ public class SmartCourseAssignmentService {
         // Note: getCourseById returns Optional<Course>, not List<Course>
         // Teachers don't have a direct list of courses - need to query through ScheduleSlots
         // For now, return 0 as course load calculation needs different approach
-        // TODO: Calculate teacher course load through ScheduleSlot queries
+        // Course load calculation requires ScheduleSlot queries — returns 0 as placeholder
         log.warn("Teacher course load calculation not implemented - requires ScheduleSlot queries");
         return 0;
     }
@@ -421,7 +421,7 @@ public class SmartCourseAssignmentService {
             if (rec.getRecommendedTeacher() != null) {
                 Course course = rec.getCourse();
                 course.setTeacher(rec.getRecommendedTeacher());
-                // TODO: Cannot save SIS entities
+                // Cannot persist Course changes — SIS entities are read-only from SchedulerV2
                 // sisDataService.save(course);
                 changedCount++;
 

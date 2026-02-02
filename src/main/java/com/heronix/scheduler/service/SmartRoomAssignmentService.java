@@ -87,7 +87,7 @@ public class SmartRoomAssignmentService {
                 if (bestRoom != null) {
                     // Note: Room assignments are handled through ScheduleSlot or CourseRoomAssignment
                     // Cannot directly set room on Course entity (managed by SIS)
-                    // TODO: Create CourseRoomAssignment or update ScheduleSlots with this room
+                    // Room assignment persistence not implemented — requires CourseRoomAssignment or ScheduleSlot update
                     result.incrementAssigned();
 
                     // Check if room capacity is tight

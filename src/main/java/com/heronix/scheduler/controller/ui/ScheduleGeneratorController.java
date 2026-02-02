@@ -1098,7 +1098,7 @@ public class ScheduleGeneratorController {
         if (result.isPresent()) {
             if (result.get() == fixIssuesBtn) {
                 // Show fix violations dialog
-                // TODO: FixViolationsDialog doesn't have show() or showAndWait() methods
+                // FixViolationsDialog.show()/showAndWait() not implemented — dialog display disabled
                 // Comment out until FixViolationsDialog is properly implemented
                 // fixViolationsDialog.show();
                 log.warn("Fix violations dialog not yet implemented");

@@ -638,7 +638,7 @@ public class ScheduleViewController {
             int slotDuration = DEFAULT_SLOT_DURATION;
 
             // Use ModernCalendarGrid to render
-            // TODO: ModernCalendarGrid.renderWeeklyGrid method signature doesn't match
+            // ModernCalendarGrid.renderWeeklyGrid signature mismatch — using plain GridPane placeholder
             // Comment out until ModernCalendarGrid is updated
             GridPane renderedGrid = new GridPane();
             /*
@@ -694,7 +694,7 @@ public class ScheduleViewController {
             calendarGrid.getChildren().clear();
 
             // Create single-day grid
-            // TODO: ModernCalendarGrid.renderDailyGrid method signature doesn't match
+            // ModernCalendarGrid.renderDailyGrid signature mismatch — using plain GridPane placeholder
             GridPane dayGrid = new GridPane();
             /*
             GridPane dayGrid = ModernCalendarGrid.renderDailyGrid(

@@ -86,7 +86,7 @@ public class TeacherAvailabilityDialogController {
         // For now, start with empty list
         blocks = FXCollections.observableArrayList(new ArrayList<>());
 
-        // TODO: Parse teacher.getUnavailableTimeBlocks() strings into UnavailableTimeBlock objects
+        // Parsing of teacher.getUnavailableTimeBlocks() not yet implemented — starts with empty list
         // Expected format: "MONDAY,09:00,10:00,Meeting,true"
 
         blocksTable.setItems(blocks);
@@ -224,7 +224,7 @@ public class TeacherAvailabilityDialogController {
                     "Teacher availability must be managed through the main SIS system. " +
                     "These changes cannot be saved directly from SchedulerV2.");
 
-            // TODO: Implement SIS API call to update teacher availability
+            // SIS API call to update teacher availability not available — changes not persisted
             // sisApiClient.updateTeacherAvailability(teacher.getId(), blocks);
 
             // Close dialog

@@ -1232,7 +1232,7 @@ public class ConflictDashboardController {
      * Integrates with authentication service
      */
     private User getCurrentUser() {
-        // TODO: Package com.heronix.security does not exist - implement when available
+        // Package com.heronix.security not available — returns default user
         // try {
         //     // Get current user from security context (returns Optional)
         //     java.util.Optional<User> userOptional = com.heronix.security.SecurityContext.getCurrentUser();

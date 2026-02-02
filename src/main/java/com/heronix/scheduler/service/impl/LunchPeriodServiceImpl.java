@@ -204,10 +204,10 @@ public class LunchPeriodServiceImpl implements LunchPeriodService {
     @Transactional(readOnly = true)
     public List<com.heronix.scheduler.model.domain.ScheduleSlot> getLunchSlotsForTeacher(
             com.heronix.scheduler.model.domain.Teacher teacher) {
-        if (// TODO: Method getScheduleSlots() does not exist on Teacher - use scheduleSlotRepository instead
+        if (// getScheduleSlots() not available on Teacher entity — using scheduleSlotRepository instead
                     scheduleSlotRepository.findByTeacherIdWithDetails(teacher.getId()) == null) return List.of();
 
-        return // TODO: Method getScheduleSlots() does not exist on Teacher - use scheduleSlotRepository instead
+        return // getScheduleSlots() not available on Teacher entity — using scheduleSlotRepository instead
                     scheduleSlotRepository.findByTeacherIdWithDetails(teacher.getId()).stream()
             .filter(slot -> Boolean.TRUE.equals(slot.getIsLunchPeriod()))
             .toList();

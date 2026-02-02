@@ -29,7 +29,7 @@ public class MasterScheduleServiceImpl implements MasterScheduleService {
     @Autowired
     private WaitlistRepository waitlistRepository;
 
-    // TODO ARCHITECTURAL: This service contains write operations to Teacher entities (prep periods)
+    // ARCHITECTURAL NOTE: This service contains write operations to Teacher entities (prep periods)
     // This violates microservice boundaries. Consider:
     // 1. Creating scheduler-specific TeacherSchedulePreferences entity
     // 2. Implementing SIS write API for prep period management
@@ -517,7 +517,7 @@ public class MasterScheduleServiceImpl implements MasterScheduleService {
             System.out.println(message); // Replace with proper logging or SIS API call
         }
 
-        // TODO: Implement SIS API call to update teacher planning periods
+        // SIS API call to update teacher planning periods not available — logged but not persisted
         // sisApiClient.assignPlanningPeriod(teacherId, period);
     }
 
@@ -591,7 +591,7 @@ public class MasterScheduleServiceImpl implements MasterScheduleService {
                 );
                 System.out.println("WARNING: " + warning);
 
-                // TODO: Update through SIS API or create SchedulerV2-specific warning entity
+                // SIS API write not available — warning logged to console instead of persisted
                 // Cannot directly modify Teacher entity - managed by SIS
             }
         }

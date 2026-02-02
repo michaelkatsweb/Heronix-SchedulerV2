@@ -753,7 +753,7 @@ public class RoomsController {
             numberField.textProperty().addListener((obs, oldVal, newVal) -> {
                 if (newVal != null && !newVal.trim().isEmpty()) {
                     try {
-                        // TODO: Method generateRoomPhoneNumber() does not exist
+                        // generateRoomPhoneNumber() not available on DistrictSettingsService — auto-generation disabled
                         String generatedPhone = null; // districtSettingsService.generateRoomPhoneNumber(newVal);
                         if (generatedPhone != null && !generatedPhone.isEmpty()) {
                             phoneField.setText(generatedPhone);
@@ -878,7 +878,7 @@ public class RoomsController {
             java.io.File file = fileChooser.showSaveDialog(roomsTable.getScene().getWindow());
 
             if (file != null) {
-                // TODO: Method exportRoomsToCSV() does not exist - implement when available
+                // exportRoomsToCSV() not available on export service — CSV export not yet implemented
                 // byte[] data = exportService.exportRoomsToCSV(roomsList);
                 // java.nio.file.Files.write(file.toPath(), data);
                 showError("Export Error", "CSV export not yet implemented");

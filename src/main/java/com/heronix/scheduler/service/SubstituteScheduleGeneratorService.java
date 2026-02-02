@@ -43,7 +43,7 @@ public class SubstituteScheduleGeneratorService {
     @Autowired
     private SISDataService sisDataService;
 
-    // TODO ARCHITECTURAL: This service creates Teacher records (substitute teachers)
+    // ARCHITECTURAL NOTE: This service creates Teacher records (substitute teachers)
     // This violates microservice boundaries. Consider:
     // 1. Creating scheduler-specific SubstituteProfile entity
     // 2. Implementing SIS write API for substitute teacher management
@@ -302,7 +302,7 @@ public class SubstituteScheduleGeneratorService {
                           ") is not registered as a Teacher in SIS. " +
                           "Please register substitute teachers in SIS before assigning schedules.");
 
-        // TODO: Implement SIS API call to register substitute as teacher
+        // SIS API call to register substitute as teacher not available — requires SIS-side registration
         // sisApiClient.registerSubstituteAsTeacher(substitute);
 
         return null;

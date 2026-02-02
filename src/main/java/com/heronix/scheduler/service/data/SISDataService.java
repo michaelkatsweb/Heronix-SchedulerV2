@@ -21,7 +21,7 @@ import java.util.Optional;
  * This service replaces direct repository access with SISApiClient calls,
  * enabling the microservice architecture while maintaining a similar API.
  *
- * TODO: EXTERNAL SIS INTEGRATION
+ * FUTURE: EXTERNAL SIS INTEGRATION
  * Add support for importing data from external SIS systems:
  *
  * 1. Skyward Integration:

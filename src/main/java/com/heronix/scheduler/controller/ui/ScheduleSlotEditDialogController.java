@@ -515,7 +515,7 @@ public class ScheduleSlotEditDialogController {
                 CourseType courseType = mapCourseTypeStringToEnum(selectedTypeName);
                 slot.getCourse().setCourseType(courseType.name());
                 // Note: Cannot save Course entity directly - managed by SIS
-                // TODO: Implement SIS API call to update course type
+                // SIS API call to update course type not available — change is in-memory only
                 log.info("Updated course type to: {} (not persisted - requires SIS API)", courseType);
             }
 
