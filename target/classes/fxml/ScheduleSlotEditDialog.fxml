@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ScrollPane?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.heronix.scheduler.controller.ui.ScheduleSlotEditDialogController"
+            fitToWidth="true" prefWidth="550" prefHeight="700">
+
+    <VBox spacing="12" style="-fx-padding: 20;">
+
+        <!-- Title -->
+        <Label fx:id="dialogTitle" text="Edit Schedule Slot" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+        <Separator/>
+
+        <!-- Course Info -->
+        <Label text="Course" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+        <Label fx:id="courseNameLabel" text="--" style="-fx-font-size: 13;"/>
+        <Label text="Course Type:"/>
+        <ComboBox fx:id="courseTypeCombo" maxWidth="Infinity"/>
+
+        <Separator/>
+
+        <!-- Teacher Section -->
+        <Label text="Teacher Assignment" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+        <Label text="Primary Teacher:"/>
+        <ComboBox fx:id="primaryTeacherCombo" maxWidth="Infinity" onAction="#handleTeacherChange"/>
+
+        <CheckBox fx:id="enableCoTeacherCheckbox" text="Enable Co-Teacher" onAction="#handleCoTeacherToggle"/>
+        <ComboBox fx:id="coTeacherCombo" maxWidth="Infinity" onAction="#handleCoTeacherChange" managed="false" visible="false"/>
+
+        <VBox fx:id="teacherConflictBox" managed="false" visible="false" style="-fx-background-color: #fff3cd; -fx-padding: 8; -fx-background-radius: 4;">
+            <Label fx:id="teacherConflictLabel" text="" wrapText="true" style="-fx-text-fill: #856404;"/>
+        </VBox>
+
+        <Separator/>
+
+        <!-- Room Section -->
+        <Label text="Room Assignment" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+        <ComboBox fx:id="roomCombo" maxWidth="Infinity" onAction="#handleRoomChange"/>
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Capacity:"/>
+            <Label fx:id="roomCapacityLabel" text="--"/>
+        </HBox>
+        <Label fx:id="capacityWarningLabel" text="" style="-fx-text-fill: #e65100;" wrapText="true"/>
+
+        <VBox fx:id="roomConflictBox" managed="false" visible="false" style="-fx-background-color: #fff3cd; -fx-padding: 8; -fx-background-radius: 4;">
+            <Label fx:id="roomConflictLabel" text="" wrapText="true" style="-fx-text-fill: #856404;"/>
+        </VBox>
+
+        <Separator/>
+
+        <!-- Day/Time Section -->
+        <Label text="Day and Time" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+        <Label text="Day of Week:"/>
+        <ComboBox fx:id="dayOfWeekCombo" maxWidth="Infinity" onAction="#handleTimeChange"/>
+
+        <Label text="Period:"/>
+        <ComboBox fx:id="periodCombo" maxWidth="Infinity" onAction="#handleTimeChange"/>
+
+        <CheckBox fx:id="customTimeCheckbox" text="Use custom time" onAction="#handleCustomTimeToggle"/>
+        <HBox fx:id="customTimeBox" spacing="10" alignment="CENTER_LEFT" managed="false" visible="false">
+            <Label text="Start:"/>
+            <ComboBox fx:id="startTimeCombo" prefWidth="120"/>
+            <Label text="End:"/>
+            <ComboBox fx:id="endTimeCombo" prefWidth="120"/>
+        </HBox>
+
+        <Separator/>
+
+        <!-- Special Event Section -->
+        <CheckBox fx:id="specialEventCheckbox" text="Special Event" onAction="#handleSpecialEventToggle"/>
+        <VBox fx:id="eventDetailsBox" spacing="8" managed="false" visible="false">
+            <Label text="Event Type:"/>
+            <ComboBox fx:id="eventTypeCombo" maxWidth="Infinity"/>
+            <Label text="Event Description:"/>
+            <TextArea fx:id="eventDescriptionArea" prefRowCount="2" wrapText="true"/>
+        </VBox>
+
+        <CheckBox fx:id="blockMultiplePeriodsCheckbox" text="Block multiple periods"/>
+
+        <Separator/>
+
+        <!-- Notes -->
+        <Label text="Notes" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+        <TextArea fx:id="notesArea" prefRowCount="3" wrapText="true" promptText="Additional notes..."/>
+
+        <Separator/>
+
+        <!-- Conflict Summary -->
+        <Label text="Conflict Summary" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+        <TextArea fx:id="conflictSummaryArea" prefRowCount="3" wrapText="true" editable="false"/>
+        <CheckBox fx:id="ignoreConflictsCheckbox" text="Ignore conflicts and save anyway"/>
+        <Button text="Check Conflicts" onAction="#handleCheckConflicts"/>
+
+        <Separator/>
+
+        <!-- Buttons -->
+        <HBox spacing="10" alignment="CENTER_RIGHT">
+            <padding><Insets top="5"/></padding>
+            <Button text="Save" onAction="#handleSave" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" prefWidth="90"/>
+            <Button text="Cancel" onAction="#handleCancel" prefWidth="90"/>
+        </HBox>
+
+    </VBox>
+</ScrollPane>

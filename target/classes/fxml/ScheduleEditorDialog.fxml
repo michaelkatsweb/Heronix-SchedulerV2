@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.heronix.scheduler.controller.ui.ScheduleEditorController"
+            prefWidth="900" prefHeight="600">
+
+    <top>
+        <VBox spacing="5" style="-fx-background-color: #f0f4f8; -fx-padding: 15;">
+            <Label fx:id="scheduleNameLabel" text="Schedule Name" style="-fx-font-size: 18; -fx-font-weight: bold;"/>
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <CheckBox fx:id="conflictWarningCheck" text="Show conflicts only"/>
+                <Label fx:id="conflictLabel" text="" style="-fx-font-size: 12;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TableView fx:id="slotsTable" BorderPane.alignment="CENTER">
+            <columns>
+                <TableColumn fx:id="courseColumn" text="Course" prefWidth="180"/>
+                <TableColumn fx:id="teacherColumn" text="Teacher" prefWidth="150"/>
+                <TableColumn fx:id="roomColumn" text="Room" prefWidth="100"/>
+                <TableColumn fx:id="dayColumn" text="Day" prefWidth="100"/>
+                <TableColumn fx:id="timeColumn" text="Time" prefWidth="130"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <right>
+        <VBox spacing="10" prefWidth="250" style="-fx-padding: 15;">
+            <Label text="Edit Selected Slot" style="-fx-font-size: 14; -fx-font-weight: bold;"/>
+
+            <Label text="Teacher:"/>
+            <ComboBox fx:id="teacherCombo" maxWidth="Infinity"/>
+
+            <Label text="Room:"/>
+            <ComboBox fx:id="roomCombo" maxWidth="Infinity"/>
+
+            <Label text="Time Slot:"/>
+            <ComboBox fx:id="timeSlotCombo" maxWidth="Infinity"/>
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <padding><Insets top="10"/></padding>
+                <Button fx:id="saveButton" text="Save" onAction="#handleSave" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" prefWidth="70"/>
+                <Button fx:id="swapButton" text="Swap Slots" onAction="#handleSwap" prefWidth="90"/>
+            </HBox>
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Button fx:id="advancedEditButton" text="Advanced Edit..." onAction="#handleAdvancedEdit" maxWidth="Infinity"/>
+            </HBox>
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Button fx:id="deleteSlotButton" text="Delete Slot" onAction="#handleDeleteSlot" style="-fx-background-color: #dc2626; -fx-text-fill: white;" prefWidth="100"/>
+            </HBox>
+        </VBox>
+    </right>
+
+    <bottom>
+        <HBox alignment="CENTER_RIGHT" spacing="10" style="-fx-padding: 10;">
+            <Button text="Close" onAction="#handleCancel" prefWidth="80"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>
