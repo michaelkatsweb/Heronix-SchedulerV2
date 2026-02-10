@@ -7,6 +7,7 @@ import com.heronix.scheduler.repository.LunchWaveRepository;
 import com.heronix.scheduler.service.LunchWaveService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -326,7 +327,8 @@ public class LunchWaveServiceImpl implements LunchWaveService {
     @Override
     @Transactional(readOnly = true)
     public Optional<LunchWave> findWaveWithMostCapacity(Long scheduleId) {
-        return lunchWaveRepository.findWaveWithMostCapacity(scheduleId);
+        List<LunchWave> results = lunchWaveRepository.findWaveWithMostCapacity(scheduleId, PageRequest.of(0, 1));
+        return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.heronix.scheduler.repository;
 
 import com.heronix.scheduler.model.domain.LunchWave;
 import com.heronix.scheduler.model.domain.Schedule;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -88,8 +89,8 @@ public interface LunchWaveRepository extends JpaRepository<LunchWave, Long> {
     /**
      * Find the lunch wave with the most available capacity
      */
-    @Query("SELECT lw FROM LunchWave lw WHERE lw.schedule.id = :scheduleId AND lw.isActive = true AND (lw.maxCapacity IS NULL OR lw.currentAssignments < lw.maxCapacity) ORDER BY (lw.maxCapacity - lw.currentAssignments) DESC, lw.waveOrder ASC LIMIT 1")
-    Optional<LunchWave> findWaveWithMostCapacity(@Param("scheduleId") Long scheduleId);
+    @Query("SELECT lw FROM LunchWave lw WHERE lw.schedule.id = :scheduleId AND lw.isActive = true AND (lw.maxCapacity IS NULL OR lw.currentAssignments < lw.maxCapacity) ORDER BY (lw.maxCapacity - lw.currentAssignments) DESC, lw.waveOrder ASC")
+    List<LunchWave> findWaveWithMostCapacity(@Param("scheduleId") Long scheduleId, Pageable pageable);
 
     /**
      * Find lunch waves that can accommodate a specific grade level

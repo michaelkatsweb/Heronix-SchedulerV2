@@ -18,13 +18,13 @@ import java.util.List;
  *
  * Purpose: Fetch student, teacher, course, and enrollment data from SIS
  *
- * SIS API Base URL: http://localhost:8080/api (default)
+ * SIS API Base URL: http://localhost:9590/api (default)
  *
  * Endpoints:
  * - GET /api/students - All students
  * - GET /api/students/{id} - Student details
- * - GET /api/teachers - All teachers
- * - GET /api/teachers/{id} - Teacher details
+ * - GET /api/teacher/all - All teachers
+ * - GET /api/teacher/by-id/{id} - Teacher details
  * - GET /api/courses - All courses
  * - GET /api/courses/{id} - Course details
  * - GET /api/enrollments - All enrollments
@@ -254,7 +254,7 @@ public class SISApiClient {
         try {
             log.debug("Fetching all teachers from SIS...");
             ResponseEntity<List<TeacherDTO>> response = restTemplate.exchange(
-                    sisBaseUrl + "/teachers",
+                    sisBaseUrl + "/teacher/all",
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<List<TeacherDTO>>() {}
@@ -277,7 +277,7 @@ public class SISApiClient {
         try {
             log.debug("Fetching teacher {} from SIS...", id);
             ResponseEntity<TeacherDTO> response = restTemplate.getForEntity(
-                    sisBaseUrl + "/teachers/" + id,
+                    sisBaseUrl + "/teacher/by-id/" + id,
                     TeacherDTO.class
             );
 
@@ -404,7 +404,7 @@ public class SISApiClient {
         try {
             log.debug("Fetching availability for teacher {} from SIS...", teacherId);
             ResponseEntity<List<TeacherAvailabilityDTO>> response = restTemplate.exchange(
-                    sisBaseUrl + "/teachers/" + teacherId + "/availability",
+                    sisBaseUrl + "/teacher/by-id/" + teacherId + "/availability",
                     HttpMethod.GET,
                     null,
                     new ParameterizedTypeReference<List<TeacherAvailabilityDTO>>() {}

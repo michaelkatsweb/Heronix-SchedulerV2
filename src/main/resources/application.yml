@@ -135,7 +135,7 @@ heronix:
   scheduler:
     # SIS Integration Configuration
     sis:
-      api-url: http://localhost:9580/api
+      api-url: http://localhost:9590/api
       timeout: 30000  # 30 seconds
       retry-attempts: 3
       retry-delay: 5000  # 5 seconds
