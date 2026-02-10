@@ -48,7 +48,7 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/api/lunch-assignments")
-@CrossOrigin(origins = {"http://localhost:9580", "http://localhost:9585", "http://localhost:9590", "http://localhost:58280", "http://localhost:58180"})
+@CrossOrigin(origins = {"http://localhost:9590", "http://localhost:8090", "http://localhost:58280", "http://localhost:58180"})
 @RequiredArgsConstructor
 public class LunchAssignmentController {
 

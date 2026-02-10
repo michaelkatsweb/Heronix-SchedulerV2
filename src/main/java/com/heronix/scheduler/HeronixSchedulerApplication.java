@@ -69,7 +69,7 @@ public class HeronixSchedulerApplication {
         log.info("REST API: http://localhost:8090/api");
         log.info("Swagger UI: http://localhost:8090/swagger-ui.html");
         log.info("H2 Console: http://localhost:8090/h2-console");
-        log.info("SIS Integration: http://localhost:8080/api");
+        log.info("SIS Integration: http://localhost:9590/api");
         log.info("========================================");
     }
 
