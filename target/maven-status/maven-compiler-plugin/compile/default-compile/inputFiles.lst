@@ -15,6 +15,7 @@ H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\Sc
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\ui\ScheduleViewController.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\util\DTOConverter.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\DutyAssignmentRepository.java
+H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\OptimizationController.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\impl\ConflictMatrixServiceImpl.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\enums\SubstituteType.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\solver\ScheduleSolution.java
@@ -177,6 +178,7 @@ H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\dto\Cou
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\ScheduleSlotService.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\impl\ScheduleImportService.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\ui\dialogs\OddEvenDayAssignmentDialogController.java
+H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\ConflictController.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\impl\DutyRosterServiceImpl.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\domain\TimeSlot.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\ui\CourseConflictMatrixController.java
@@ -198,6 +200,7 @@ H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\ui
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\enums\DutyType.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\enums\SpecialEventType.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\impl\LunchAssignmentServiceImpl.java
+H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\ScheduleController.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\config\DatabaseConfig.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\ui\EnhancedScheduleViewController.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\domain\PeriodTimer.java

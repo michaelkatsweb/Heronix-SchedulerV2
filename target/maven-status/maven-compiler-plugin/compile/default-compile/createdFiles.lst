@@ -102,6 +102,7 @@ com\heronix\scheduler\service\analysis\ResourceCapacityAnalyzer.class
 com\heronix\scheduler\solver\exception\SchedulingSolverException.class
 com\heronix\scheduler\controller\ui\CourseConflictMatrixController$3.class
 com\heronix\scheduler\service\OptimizationService.class
+com\heronix\scheduler\controller\ScheduleController.class
 com\heronix\scheduler\model\dto\LunchAssignmentDTO.class
 com\heronix\scheduler\model\dto\ScheduleDiagnosticReport$IssueCategory.class
 com\heronix\scheduler\controller\ui\RoomsController$6.class
@@ -211,6 +212,7 @@ com\heronix\scheduler\repository\WaitlistRepository.class
 com\heronix\scheduler\controller\ui\DragDropScheduleEditorController$1.class
 com\heronix\scheduler\controller\ScheduleOverrideController.class
 com\heronix\scheduler\controller\ui\ScheduleViewController.class
+com\heronix\scheduler\controller\OptimizationController.class
 com\heronix\scheduler\controller\ui\SpecialEventBlockController$2.class
 com\heronix\scheduler\controller\ui\SpecialDutyRosterController.class
 com\heronix\scheduler\model\dto\UserFeedback$UserFeedbackBuilder.class
@@ -424,6 +426,7 @@ com\heronix\scheduler\ui\component\ModernCalendarGrid.class
 com\heronix\scheduler\util\DataSufficiencyChecker$DataSufficiencyReport.class
 com\heronix\scheduler\model\domain\DutyAssignment.class
 com\heronix\scheduler\model\domain\SchedulerConfiguration.class
+com\heronix\scheduler\controller\ConflictController$IgnoreConflictRequest.class
 com\heronix\scheduler\controller\LunchAssignmentController$ReassignTeacherRequest.class
 com\heronix\scheduler\util\ResponsiveDesignHelper.class
 com\heronix\scheduler\service\ConflictDetectorService$ValidationResult.class
@@ -460,6 +463,7 @@ com\heronix\scheduler\service\IntelligentCourseAssignmentService.class
 com\heronix\scheduler\controller\ui\ConflictDashboardController.class
 com\heronix\scheduler\service\ConflictMatrixService.class
 com\heronix\scheduler\repository\TeacherLunchAssignmentRepository.class
+com\heronix\scheduler\controller\ConflictController$MarkResolvedRequest.class
 com\heronix\scheduler\controller\ui\DragDropScheduleEditorController$ScheduleChange.class
 com\heronix\scheduler\model\enums\RoomAssignmentType.class
 com\heronix\scheduler\model\dto\ConflictResolutionSuggestion$ResolutionAction.class
@@ -476,6 +480,7 @@ com\heronix\scheduler\repository\DutyAssignmentRepository.class
 com\heronix\scheduler\controller\ScheduleOverrideController$2.class
 com\heronix\scheduler\solver\exception\SolverExecutionException.class
 com\heronix\scheduler\model\dto\ComplianceViolation$ComplianceViolationBuilder.class
+com\heronix\scheduler\controller\ConflictController$ResolveConflictRequest.class
 com\heronix\scheduler\model\domain\CourseRoomAssignment.class
 com\heronix\scheduler\service\impl\DeepLearningSchedulerService$NNPredictionResult$NNPredictionResultBuilder.class
 com\heronix\scheduler\service\SmartTeacherAssignmentService$WorkloadLimitMode.class
@@ -522,6 +527,7 @@ com\heronix\scheduler\model\domain\PeriodTimer$PeriodTimerBuilder.class
 com\heronix\scheduler\model\enums\ConstraintType$ConstraintCategory.class
 com\heronix\scheduler\service\impl\ConflictDetectorServiceImpl.class
 com\heronix\scheduler\repository\SchedulerConfigurationRepository.class
+com\heronix\scheduler\controller\ConflictController.class
 com\heronix\scheduler\controller\ui\EnhancedScheduleViewController$Resolution.class
 com\heronix\scheduler\controller\ui\ScheduleEditorController.class
 com\heronix\scheduler\model\domain\OptimizationResult$OptimizationResultBuilder.class

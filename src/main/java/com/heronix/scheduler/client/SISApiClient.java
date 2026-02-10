@@ -189,7 +189,7 @@ public class SISApiClient {
 
     public SISApiClient(
             RestTemplate restTemplate,
-            @Value("${heronix.scheduler.sis.api-url:http://localhost:8080/api}") String sisBaseUrl) {
+            @Value("${heronix.scheduler.sis.api-url:http://localhost:9590/api}") String sisBaseUrl) {
         this.restTemplate = restTemplate;
         this.sisBaseUrl = sisBaseUrl;
         log.info("SIS API Client initialized with base URL: {}", sisBaseUrl);
