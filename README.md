@@ -148,7 +148,7 @@ Scores indicate solution quality:
 3. **Ensure SIS is running:**
    ```bash
    # SIS must be running on port 8080
-   curl http://localhost:8080/actuator/health
+   curl http://localhost:9590/actuator/health
    ```
 
 4. **Run the application:**
@@ -179,7 +179,7 @@ Configure connection to Heronix-SIS:
 heronix:
   scheduler:
     sis:
-      api-url: http://localhost:8080/api
+      api-url: http://localhost:9590/api
       timeout: 30000
       retry-attempts: 3
 ```
@@ -454,7 +454,7 @@ curl http://localhost:8090/actuator/metrics/optaplanner.solver.solve.duration
 ### Common Issues
 
 **Issue: Cannot connect to SIS**
-- Verify SIS is running: `curl http://localhost:8080/actuator/health`
+- Verify SIS is running: `curl http://localhost:9590/actuator/health`
 - Check network connectivity
 - Review firewall rules
 - Check `heronix.scheduler.sis.api-url` configuration
