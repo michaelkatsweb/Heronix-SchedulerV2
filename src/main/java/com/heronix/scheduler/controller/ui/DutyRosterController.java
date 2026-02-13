@@ -179,7 +179,7 @@ public class DutyRosterController {
         statusCol.setCellValueFactory(
                 data -> new SimpleStringProperty(data.getValue().isSubstitute() ? "SUBSTITUTE" : "REGULAR"));
 
-        dutyTable.getColumns().addAll(dateCol, typeCol, teacherCol, locationCol, timeCol, statusCol);
+        dutyTable.getColumns().addAll(List.of(dateCol, typeCol, teacherCol, locationCol, timeCol, statusCol));
         dutyTable.setItems(allDuties);
 
         // Row click handler

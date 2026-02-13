@@ -158,7 +158,7 @@ public class ResponsiveDesignHelper {
         }
 
         // Set table resize policy to constrained (columns fill available space)
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 
         log.debug("Configured auto-sizing for table with {} columns", tableView.getColumns().size());
     }

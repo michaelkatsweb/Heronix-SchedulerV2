@@ -722,7 +722,7 @@ public class EnhancedScheduleViewController {
         roomCol.setCellValueFactory(data -> new SimpleStringProperty(
                 data.getValue().getRoom() != null ? data.getValue().getRoom().getRoomNumber() : "N/A"));
 
-        tableView.getColumns().addAll(dayCol, timeCol, courseCol, teacherCol, roomCol);
+        tableView.getColumns().addAll(List.of(dayCol, timeCol, courseCol, teacherCol, roomCol));
         tableView.getItems().setAll(allSlots);
     }
 

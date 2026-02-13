@@ -30,7 +30,10 @@ import java.util.List;
  * @since 2025-10-11
  */
 @Entity
-@Table(name = "schedule_slots")
+@Table(name = "schedule_slots", indexes = {
+        @Index(name = "idx_schedule_slot_day", columnList = "day_of_week"),
+        @Index(name = "idx_schedule_slot_time", columnList = "start_time")
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -109,11 +112,9 @@ public class ScheduleSlot {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "day_of_week")
-    @org.hibernate.annotations.Index(name = "idx_schedule_slot_day")
     private DayOfWeek dayOfWeek;
 
     @Column(name = "start_time")
-    @org.hibernate.annotations.Index(name = "idx_schedule_slot_time")
     private LocalTime startTime;
 
     @Column(name = "end_time")

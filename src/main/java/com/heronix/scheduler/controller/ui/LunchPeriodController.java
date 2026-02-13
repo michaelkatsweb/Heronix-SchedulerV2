@@ -60,7 +60,7 @@ public class LunchPeriodController {
         locationCol.setCellValueFactory(
                 data -> new javafx.beans.property.SimpleStringProperty(data.getValue().getLocation()));
 
-        lunchPeriodTable.getColumns().addAll(nameCol, groupCol, timeCol, locationCol);
+        lunchPeriodTable.getColumns().addAll(List.of(nameCol, groupCol, timeCol, locationCol));
     }
 
     private void loadLunchPeriods() {
