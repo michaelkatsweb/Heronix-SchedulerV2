@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Event REST API Controller - FIXED
@@ -60,13 +61,64 @@ public class EventController {
      * Create new event
      */
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        // Set timestamps
-        if (event.getStartDateTime() == null) {
+    public ResponseEntity<?> createEvent(@RequestBody Map<String, Object> body) {
+        Event event = new Event();
+
+        // Handle name - accept both "name" and "title"
+        String name = (String) body.getOrDefault("name", body.get("title"));
+        if (name == null || name.isBlank()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Field 'name' is required"));
+        }
+        event.setName(name);
+
+        // Handle description
+        if (body.containsKey("description")) {
+            event.setDescription((String) body.get("description"));
+        }
+
+        // Handle event type
+        if (body.containsKey("eventType")) {
+            try {
+                event.setEventType(EventType.valueOf((String) body.get("eventType")));
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.badRequest().body(Map.of("error", "Invalid eventType: " + body.get("eventType")));
+            }
+        }
+
+        // Handle start/end date-times - accept both DateTime and Date formats
+        if (body.containsKey("startDateTime")) {
+            event.setStartDateTime(LocalDateTime.parse((String) body.get("startDateTime")));
+        } else if (body.containsKey("startDate")) {
+            event.setStartDateTime(LocalDateTime.parse((String) body.get("startDate")));
+        } else {
             event.setStartDateTime(LocalDateTime.now());
         }
-        if (event.getEndDateTime() == null) {
+
+        if (body.containsKey("endDateTime")) {
+            event.setEndDateTime(LocalDateTime.parse((String) body.get("endDateTime")));
+        } else if (body.containsKey("endDate")) {
+            event.setEndDateTime(LocalDateTime.parse((String) body.get("endDate")));
+        } else {
             event.setEndDateTime(event.getStartDateTime().plusHours(1));
+        }
+
+        // Handle boolean fields
+        if (body.containsKey("blocksScheduling")) {
+            event.setBlocksScheduling((Boolean) body.get("blocksScheduling"));
+        }
+        if (body.containsKey("allDay")) {
+            event.setAllDay((Boolean) body.get("allDay"));
+        }
+        if (body.containsKey("recurring")) {
+            event.setRecurring((Boolean) body.get("recurring"));
+        }
+
+        // Handle optional string fields
+        if (body.containsKey("recurrencePattern")) {
+            event.setRecurrencePattern((String) body.get("recurrencePattern"));
+        }
+        if (body.containsKey("notes")) {
+            event.setNotes((String) body.get("notes"));
         }
 
         Event saved = eventRepository.save(event);

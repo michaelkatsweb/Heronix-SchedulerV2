@@ -68,6 +68,32 @@ public class ScheduleController {
     // ========== CRUD ==========
 
     /**
+     * POST /api/schedule
+     * Create a new schedule (simple CRUD - does not run AI generation)
+     */
+    @PostMapping
+    public ResponseEntity<?> createSchedule(@RequestBody Schedule schedule) {
+        log.info("POST /api/schedule - Creating schedule: {}", schedule.getName());
+
+        if (schedule.getName() == null || schedule.getName().isBlank()) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Field 'name' is required"));
+        }
+
+        // Set defaults if not provided
+        if (schedule.getStatus() == null) {
+            schedule.setStatus(com.heronix.scheduler.model.enums.ScheduleStatus.DRAFT);
+        }
+
+        try {
+            Schedule saved = scheduleService.saveSchedule(schedule);
+            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        } catch (Exception e) {
+            log.error("Failed to create schedule", e);
+            return ResponseEntity.badRequest().body(Map.of("error", "Failed to create schedule: " + e.getMessage()));
+        }
+    }
+
+    /**
      * GET /api/schedule
      * Get all schedules
      */

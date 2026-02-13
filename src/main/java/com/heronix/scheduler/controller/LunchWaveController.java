@@ -61,8 +61,13 @@ public class LunchWaveController {
      * Get all lunch waves for a schedule
      */
     @GetMapping
-    public ResponseEntity<List<LunchWave>> getLunchWaves(@RequestParam Long scheduleId) {
+    public ResponseEntity<List<LunchWave>> getLunchWaves(@RequestParam(required = false) Long scheduleId) {
         log.info("GET /api/lunch-waves?scheduleId={}", scheduleId);
+
+        if (scheduleId == null) {
+            List<LunchWave> allWaves = lunchWaveRepository.findAll();
+            return ResponseEntity.ok(allWaves);
+        }
 
         List<LunchWave> waves = lunchWaveService.getAllLunchWaves(scheduleId);
         return ResponseEntity.ok(waves);
@@ -86,8 +91,12 @@ public class LunchWaveController {
      * Get only active lunch waves for a schedule
      */
     @GetMapping("/active")
-    public ResponseEntity<List<LunchWave>> getActiveLunchWaves(@RequestParam Long scheduleId) {
+    public ResponseEntity<List<LunchWave>> getActiveLunchWaves(@RequestParam(required = false) Long scheduleId) {
         log.info("GET /api/lunch-waves/active?scheduleId={}", scheduleId);
+
+        if (scheduleId == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         List<LunchWave> waves = lunchWaveService.getActiveLunchWaves(scheduleId);
         return ResponseEntity.ok(waves);
@@ -98,8 +107,12 @@ public class LunchWaveController {
      * Get lunch waves with available capacity
      */
     @GetMapping("/available")
-    public ResponseEntity<List<LunchWave>> getAvailableLunchWaves(@RequestParam Long scheduleId) {
+    public ResponseEntity<List<LunchWave>> getAvailableLunchWaves(@RequestParam(required = false) Long scheduleId) {
         log.info("GET /api/lunch-waves/available?scheduleId={}", scheduleId);
+
+        if (scheduleId == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         List<LunchWave> waves = lunchWaveService.getAvailableLunchWaves(scheduleId);
         return ResponseEntity.ok(waves);
@@ -110,8 +123,12 @@ public class LunchWaveController {
      * Get statistics for lunch waves
      */
     @GetMapping("/stats")
-    public ResponseEntity<Map<String, Object>> getLunchWaveStats(@RequestParam Long scheduleId) {
+    public ResponseEntity<Map<String, Object>> getLunchWaveStats(@RequestParam(required = false) Long scheduleId) {
         log.info("GET /api/lunch-waves/stats?scheduleId={}", scheduleId);
+
+        if (scheduleId == null) {
+            return ResponseEntity.badRequest().build();
+        }
 
         int totalCapacity = lunchWaveService.getTotalCapacity(scheduleId);
         int totalAssignments = lunchWaveService.getTotalAssignments(scheduleId);
