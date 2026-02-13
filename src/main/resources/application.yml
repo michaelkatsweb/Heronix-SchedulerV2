@@ -20,8 +20,8 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/heronix_scheduler
     driver-class-name: org.postgresql.Driver
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20

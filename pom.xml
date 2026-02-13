@@ -285,6 +285,9 @@
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>com.heronix.scheduler.HeronixSchedulerApplication</mainClass>
+                    <options>
+                        <option>-Dspring.profiles.active=h2</option>
+                    </options>
                 </configuration>
             </plugin>
 
