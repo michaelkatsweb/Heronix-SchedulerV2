@@ -117,6 +117,8 @@ public class ScheduleGeneratorController {
     @FXML
     private Spinner<Integer> lunchStartHourSpinner;
     @FXML
+    private Spinner<Integer> lunchStartMinuteSpinner;
+    @FXML
     private Spinner<Integer> maxConsecutiveHoursSpinner;
     @FXML
     private Spinner<Integer> maxDailyHoursSpinner;
@@ -297,6 +299,13 @@ public class ScheduleGeneratorController {
                         new SpinnerValueFactory.IntegerSpinnerValueFactory(11, 14, 12));
             } else {
                 log.warn("⚠ lunchStartHourSpinner is null");
+            }
+
+            if (lunchStartMinuteSpinner != null) {
+                lunchStartMinuteSpinner.setValueFactory(
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
+            } else {
+                log.warn("⚠ lunchStartMinuteSpinner is null");
             }
 
             // Duration spinners (minutes)
@@ -683,6 +692,9 @@ public class ScheduleGeneratorController {
             }
                 lunchStartHourSpinner.getValueFactory().setValue(12);
             }
+            if (lunchStartMinuteSpinner != null) {
+                lunchStartMinuteSpinner.getValueFactory().setValue(0);
+            }
             if (lunchDurationSpinner != null) {
                 lunchDurationSpinner.getValueFactory().setValue(30);
             }
@@ -882,6 +894,14 @@ public class ScheduleGeneratorController {
             } catch (Exception e) {
                 log.warn("Invalid lunch start time format: {}", lunchStartTimeField.getText());
             }
+        } else if (lunchStartHourSpinner != null && lunchStartHourSpinner.getValue() != null) {
+            // Fallback: combine hour + minute spinners
+            int hour = lunchStartHourSpinner.getValue();
+            int minute = (lunchStartMinuteSpinner != null && lunchStartMinuteSpinner.getValue() != null)
+                    ? lunchStartMinuteSpinner.getValue() : 0;
+            LocalTime combinedTime = LocalTime.of(hour, minute);
+            request.setLunchStartTime(combinedTime);
+            log.debug("Using spinner-based lunch start time: {}", combinedTime);
         }
 
         // Constraints
