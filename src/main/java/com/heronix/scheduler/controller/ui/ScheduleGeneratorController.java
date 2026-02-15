@@ -111,13 +111,8 @@ public class ScheduleGeneratorController {
     @FXML
     private Spinner<Integer> passingPeriodSpinner;  // NEW - Phase 2
 
-    // REMOVED: enableLunchCheckBox - lunch is now mandatory
-    // @FXML
-    // private CheckBox enableLunchCheckBox;
-    @FXML
-    private Spinner<Integer> lunchStartHourSpinner;
-    @FXML
-    private Spinner<Integer> lunchStartMinuteSpinner;
+    // REMOVED: enableLunchCheckBox, lunchStartHourSpinner, lunchStartMinuteSpinner
+    // Lunch start time is now configured solely via lunchStartTimeField (HH:MM text)
     @FXML
     private Spinner<Integer> maxConsecutiveHoursSpinner;
     @FXML
@@ -292,20 +287,6 @@ public class ScheduleGeneratorController {
                         new SpinnerValueFactory.IntegerSpinnerValueFactory(12, 20, 15));
             } else {
                 log.warn("⚠ endHourSpinner is null");
-            }
-
-            if (lunchStartHourSpinner != null) {
-                lunchStartHourSpinner.setValueFactory(
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(11, 14, 12));
-            } else {
-                log.warn("⚠ lunchStartHourSpinner is null");
-            }
-
-            if (lunchStartMinuteSpinner != null) {
-                lunchStartMinuteSpinner.setValueFactory(
-                        new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 59, 0));
-            } else {
-                log.warn("⚠ lunchStartMinuteSpinner is null");
             }
 
             // Duration spinners (minutes)
@@ -684,16 +665,9 @@ public class ScheduleGeneratorController {
                 schoolEndTimeField.setText("14:10");  // School ends (2:10 PM)
             }
 
-            // Enable lunch: 12:00 PM, 30 minutes
-            if (lunchStartHourSpinner != null) {
-            // Lunch is now always enabled by law
+            // Lunch is now always enabled by law — use text field only
             if (lunchStartTimeField != null) {
                 lunchStartTimeField.setText("10:50");  // Default lunch time
-            }
-                lunchStartHourSpinner.getValueFactory().setValue(12);
-            }
-            if (lunchStartMinuteSpinner != null) {
-                lunchStartMinuteSpinner.getValueFactory().setValue(0);
             }
             if (lunchDurationSpinner != null) {
                 lunchDurationSpinner.getValueFactory().setValue(30);
@@ -729,7 +703,7 @@ public class ScheduleGeneratorController {
                             + nextMonday.format(DateTimeFormatter.ofPattern("MMM d, yyyy")) + "\n" +
                             "• School day: 7:00 AM - 3:00 PM\n" +
                             "• 50-minute class periods\n" +
-                            "• 30-minute lunch at 12:00 PM\n" +
+                            "• 30-minute lunch at 10:50 AM\n" +
                             "• Max 3 consecutive hours per teacher\n" +
                             "• Max 7 hours per day per teacher\n\n" +
                             "You can modify these settings or click Generate to create your schedule.");
@@ -885,23 +859,19 @@ public class ScheduleGeneratorController {
         request.setLunchStartHour(12);  // Default 12:00 PM (overridden by minute-precise if set)
         request.setLunchDuration(lunchDurationSpinner != null ? lunchDurationSpinner.getValue() : 30);
 
-        // NEW: Minute-precise lunch time (takes priority over hour-based)
+        // Minute-precise lunch time from text field, with 12:00 fallback
         if (lunchStartTimeField != null && !lunchStartTimeField.getText().trim().isEmpty()) {
             try {
                 LocalTime time = LocalTime.parse(lunchStartTimeField.getText().trim());
                 request.setLunchStartTime(time);
                 log.debug("Using minute-precise lunch start time: {}", time);
             } catch (Exception e) {
-                log.warn("Invalid lunch start time format: {}", lunchStartTimeField.getText());
+                log.warn("Invalid lunch start time format '{}', falling back to 12:00", lunchStartTimeField.getText());
+                request.setLunchStartTime(LocalTime.of(12, 0));
             }
-        } else if (lunchStartHourSpinner != null && lunchStartHourSpinner.getValue() != null) {
-            // Fallback: combine hour + minute spinners
-            int hour = lunchStartHourSpinner.getValue();
-            int minute = (lunchStartMinuteSpinner != null && lunchStartMinuteSpinner.getValue() != null)
-                    ? lunchStartMinuteSpinner.getValue() : 0;
-            LocalTime combinedTime = LocalTime.of(hour, minute);
-            request.setLunchStartTime(combinedTime);
-            log.debug("Using spinner-based lunch start time: {}", combinedTime);
+        } else {
+            request.setLunchStartTime(LocalTime.of(12, 0));
+            log.debug("No lunch start time specified, defaulting to 12:00");
         }
 
         // Constraints

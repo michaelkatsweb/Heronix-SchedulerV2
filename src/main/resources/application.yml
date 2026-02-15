@@ -136,6 +136,7 @@ heronix:
     # SIS Integration Configuration
     sis:
       api-url: http://localhost:9590/api
+      api-key: hx_live_scheduler_default_sync_key_2026
       timeout: 30000  # 30 seconds
       retry-attempts: 3
       retry-delay: 5000  # 5 seconds

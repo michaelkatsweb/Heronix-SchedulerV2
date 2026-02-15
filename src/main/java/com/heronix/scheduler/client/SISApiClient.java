@@ -4,6 +4,8 @@ import com.heronix.scheduler.model.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -186,13 +188,28 @@ public class SISApiClient {
 
     private final RestTemplate restTemplate;
     private final String sisBaseUrl;
+    private final String apiKey;
 
     public SISApiClient(
             RestTemplate restTemplate,
-            @Value("${heronix.scheduler.sis.api-url:http://localhost:9590/api}") String sisBaseUrl) {
+            @Value("${heronix.scheduler.sis.api-url:http://localhost:9590/api}") String sisBaseUrl,
+            @Value("${heronix.scheduler.sis.api-key:}") String apiKey) {
         this.restTemplate = restTemplate;
         this.sisBaseUrl = sisBaseUrl;
-        log.info("SIS API Client initialized with base URL: {}", sisBaseUrl);
+        this.apiKey = apiKey;
+        log.info("SIS API Client initialized with base URL: {}, API key configured: {}",
+                sisBaseUrl, apiKey != null && !apiKey.isBlank());
+    }
+
+    /**
+     * Build an HttpEntity with the X-API-Key authentication header.
+     */
+    private HttpEntity<Void> authEntity() {
+        HttpHeaders headers = new HttpHeaders();
+        if (apiKey != null && !apiKey.isBlank()) {
+            headers.set("X-API-Key", apiKey);
+        }
+        return new HttpEntity<>(headers);
     }
 
     // ========================================================================
@@ -208,7 +225,7 @@ public class SISApiClient {
             ResponseEntity<List<StudentDTO>> response = restTemplate.exchange(
                     sisBaseUrl + "/students",
                     HttpMethod.GET,
-                    null,
+                    authEntity(),
                     new ParameterizedTypeReference<List<StudentDTO>>() {}
             );
 
@@ -228,8 +245,10 @@ public class SISApiClient {
     public StudentDTO getStudentById(Long id) {
         try {
             log.debug("Fetching student {} from SIS...", id);
-            ResponseEntity<StudentDTO> response = restTemplate.getForEntity(
+            ResponseEntity<StudentDTO> response = restTemplate.exchange(
                     sisBaseUrl + "/students/" + id,
+                    HttpMethod.GET,
+                    authEntity(),
                     StudentDTO.class
             );
 
@@ -256,7 +275,7 @@ public class SISApiClient {
             ResponseEntity<List<TeacherDTO>> response = restTemplate.exchange(
                     sisBaseUrl + "/teacher/all",
                     HttpMethod.GET,
-                    null,
+                    authEntity(),
                     new ParameterizedTypeReference<List<TeacherDTO>>() {}
             );
 
@@ -276,8 +295,10 @@ public class SISApiClient {
     public TeacherDTO getTeacherById(Long id) {
         try {
             log.debug("Fetching teacher {} from SIS...", id);
-            ResponseEntity<TeacherDTO> response = restTemplate.getForEntity(
+            ResponseEntity<TeacherDTO> response = restTemplate.exchange(
                     sisBaseUrl + "/teacher/by-id/" + id,
+                    HttpMethod.GET,
+                    authEntity(),
                     TeacherDTO.class
             );
 
@@ -304,7 +325,7 @@ public class SISApiClient {
             ResponseEntity<List<CourseDTO>> response = restTemplate.exchange(
                     sisBaseUrl + "/courses",
                     HttpMethod.GET,
-                    null,
+                    authEntity(),
                     new ParameterizedTypeReference<List<CourseDTO>>() {}
             );
 
@@ -324,8 +345,10 @@ public class SISApiClient {
     public CourseDTO getCourseById(Long id) {
         try {
             log.debug("Fetching course {} from SIS...", id);
-            ResponseEntity<CourseDTO> response = restTemplate.getForEntity(
+            ResponseEntity<CourseDTO> response = restTemplate.exchange(
                     sisBaseUrl + "/courses/" + id,
+                    HttpMethod.GET,
+                    authEntity(),
                     CourseDTO.class
             );
 
@@ -352,7 +375,7 @@ public class SISApiClient {
             ResponseEntity<List<EnrollmentDTO>> response = restTemplate.exchange(
                     sisBaseUrl + "/enrollments",
                     HttpMethod.GET,
-                    null,
+                    authEntity(),
                     new ParameterizedTypeReference<List<EnrollmentDTO>>() {}
             );
 
@@ -379,7 +402,7 @@ public class SISApiClient {
             ResponseEntity<List<LunchAssignmentDTO>> response = restTemplate.exchange(
                     sisBaseUrl + "/lunch-assignments",
                     HttpMethod.GET,
-                    null,
+                    authEntity(),
                     new ParameterizedTypeReference<List<LunchAssignmentDTO>>() {}
             );
 
@@ -406,7 +429,7 @@ public class SISApiClient {
             ResponseEntity<List<TeacherAvailabilityDTO>> response = restTemplate.exchange(
                     sisBaseUrl + "/teacher/by-id/" + teacherId + "/availability",
                     HttpMethod.GET,
-                    null,
+                    authEntity(),
                     new ParameterizedTypeReference<List<TeacherAvailabilityDTO>>() {}
             );
 
@@ -430,8 +453,10 @@ public class SISApiClient {
      */
     public boolean isSISAvailable() {
         try {
-            ResponseEntity<String> response = restTemplate.getForEntity(
+            ResponseEntity<String> response = restTemplate.exchange(
                     sisBaseUrl.replace("/api", "") + "/actuator/health",
+                    HttpMethod.GET,
+                    authEntity(),
                     String.class
             );
             boolean available = response.getStatusCode().is2xxSuccessful();
