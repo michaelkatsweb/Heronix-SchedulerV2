@@ -20,8 +20,8 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/heronix_scheduler
     driver-class-name: org.postgresql.Driver
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
     hikari:
       minimum-idle: 5
       maximum-pool-size: 20
@@ -136,6 +136,7 @@ heronix:
     # SIS Integration Configuration
     sis:
       api-url: http://localhost:9590/api
+      api-key: hx_live_scheduler_default_sync_key_2026
       timeout: 30000  # 30 seconds
       retry-attempts: 3
       retry-delay: 5000  # 5 seconds

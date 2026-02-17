@@ -12,6 +12,7 @@ H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\Teach
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\util\DiagnosticChecker.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\SmartRoomAssignmentService.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\SchedulerSettingsController.java
+H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\CourseRepository.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\ui\ScheduleViewController.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\util\DTOConverter.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\DutyAssignmentRepository.java
@@ -32,6 +33,7 @@ H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\impl\
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\dto\ConflictResolutionSuggestion.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\dto\LunchCohort.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\enums\AssignmentSource.java
+H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\StudentRepository.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\ConflictMatrixRepository.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\domain\Teacher.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\analysis\ResourceCapacityAnalyzer.java
@@ -96,6 +98,7 @@ H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\util\Authenti
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\enums\ScheduleType.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\CourseEnrollmentRequestRepository.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\UnavailableTimeBlockDialogController.java
+H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\TeacherRepository.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\domain\Conflict.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\dto\ScheduleGenerationResult.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\SpecialEventBlockService.java
@@ -154,6 +157,7 @@ H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\impl\
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\ScheduleIssueDetector.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\dto\Conflict.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\RoomZoneService.java
+H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\AdminScheduleController.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\dto\ScheduleRequest.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\dto\UnavailableTimeBlock.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\domain\StudentLunchAssignment.java
@@ -208,6 +212,7 @@ H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\Lu
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\controller\ui\EventsController.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\util\DialogUtils.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\ui\util\ScheduleColorScheme.java
+H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\TimeSlotRepository.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\WaitlistRepository.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\TimeSlotService.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\util\AssignCoursesToTeachers.java
@@ -218,6 +223,7 @@ H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\impl\
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\SpecialConditionRepository.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\model\enums\UsagePattern.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\ScheduleRepository.java
+H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\config\OpenApiConfig.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\repository\TeacherLunchAssignmentRepository.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\ConflictAnalysisService.java
 H:\Heronix\Heronix-SchedulerV2\src\main\java\com\heronix\scheduler\service\SmartTeacherAssignmentService.java

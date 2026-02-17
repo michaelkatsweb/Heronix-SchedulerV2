@@ -104,6 +104,7 @@ com\heronix\scheduler\controller\ui\CourseConflictMatrixController$3.class
 com\heronix\scheduler\service\OptimizationService.class
 com\heronix\scheduler\controller\ScheduleController.class
 com\heronix\scheduler\model\dto\LunchAssignmentDTO.class
+com\heronix\scheduler\repository\TimeSlotRepository.class
 com\heronix\scheduler\model\dto\ScheduleDiagnosticReport$IssueCategory.class
 com\heronix\scheduler\controller\ui\RoomsController$6.class
 com\heronix\scheduler\service\impl\FitnessEvaluator$FitnessBreakdown.class
@@ -118,6 +119,8 @@ com\heronix\scheduler\repository\StudentLunchAssignmentRepository.class
 com\heronix\scheduler\model\domain\CertificationStandard$RegulatorySource.class
 com\heronix\scheduler\service\impl\ConflictResolverServiceImpl$1.class
 com\heronix\scheduler\client\SISApiClient$2.class
+com\heronix\scheduler\config\OpenApiConfig.class
+com\heronix\scheduler\repository\CourseRepository.class
 com\heronix\scheduler\service\MasterScheduleService.class
 com\heronix\scheduler\model\dto\ComplianceAlert$AlertSeverity.class
 com\heronix\scheduler\config\ApplicationProperties$Print.class
@@ -180,6 +183,7 @@ com\heronix\scheduler\service\ConflictResolverService$ResolutionAction.class
 com\heronix\scheduler\service\impl\ComplianceValidationService.class
 com\heronix\scheduler\controller\ui\ScheduleDiagnosticDialogController.class
 com\heronix\scheduler\model\dto\ConflictResolutionSuggestion.class
+com\heronix\scheduler\controller\AdminScheduleController.class
 com\heronix\scheduler\controller\ui\ScheduleViewerController$1.class
 com\heronix\scheduler\controller\ui\RoomUtilizationDashboardController.class
 com\heronix\scheduler\controller\ui\ConflictDashboardController$7.class
@@ -371,6 +375,7 @@ com\heronix\scheduler\service\impl\DeepLearningSchedulerService$Experience.class
 com\heronix\scheduler\service\TeacherAssignmentService.class
 com\heronix\scheduler\model\domain\CertificationStandard.class
 com\heronix\scheduler\model\dto\ScheduleDiagnosticReport$DiagnosticIssue.class
+com\heronix\scheduler\repository\StudentRepository.class
 com\heronix\scheduler\client\SISApiClient.class
 com\heronix\scheduler\model\enums\Role.class
 com\heronix\scheduler\controller\ui\SchedulesController$4.class
@@ -446,6 +451,7 @@ com\heronix\scheduler\model\dto\TeacherAvailabilityDTO.class
 com\heronix\scheduler\controller\ui\ConflictDashboardController$1.class
 com\heronix\scheduler\repository\SubstituteAssignmentRepository.class
 com\heronix\scheduler\controller\ui\LunchPeriodManagementController$1.class
+com\heronix\scheduler\controller\AdminScheduleController$JobState.class
 com\heronix\scheduler\model\dto\ScheduleDiagnosticReport$DiagnosticIssue$DiagnosticIssueBuilder.class
 com\heronix\scheduler\service\ScheduleViolationAnalyzer$ViolationType.class
 com\heronix\scheduler\service\RotationScheduleService.class
@@ -487,6 +493,7 @@ com\heronix\scheduler\service\SmartTeacherAssignmentService$WorkloadLimitMode.cl
 com\heronix\scheduler\service\impl\DeepLearningSchedulerService$RLOptimizationResult.class
 com\heronix\scheduler\controller\ui\ScheduleGeneratorController$2.class
 com\heronix\scheduler\model\enums\PriorityRuleType.class
+com\heronix\scheduler\repository\TeacherRepository.class
 com\heronix\scheduler\config\ApplicationProperties$Export.class
 com\heronix\scheduler\model\dto\AIIssue$Severity.class
 com\heronix\scheduler\service\SubstituteScheduleGeneratorService.class
